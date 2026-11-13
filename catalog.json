@@ -611,7 +611,8 @@
       "redirects": [],
       "related": [],
       "assets": []
-    }
+    },
+    {"id":"components","product":"docsai","version":"v1","slug":"components","file":"docs/docsai/v1/writing/components.md","title":"Use reader components","kind":"markdown","owner":"documentation-team","classification":"public","lifecycle":"published","reviewDate":"2027-11-13","section":"writing","pageType":"feature-guide","redirects":[],"related":[],"assets":[]}
   ],
   "assets": [
     {
