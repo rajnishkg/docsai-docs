@@ -1,6 +1,11 @@
 {
   "schemaVersion": 2,
-  "areas": [],
+  "areas": [
+    {
+      "path": "apis/docsai/billing-sample/",
+      "team": "api"
+    }
+  ],
   "products": [
     {
       "id": "docsai",

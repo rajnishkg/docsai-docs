@@ -1,4 +1,5 @@
 # Code owners. Add your own rules outside the DocsAI block below.
 # BEGIN DocsAI areas
 # Generated from catalog.json areas; DocsAI replaces only the lines inside this block.
+# /apis/docsai/billing-sample/ owned by DocsAI team api (no provider team)
 # END DocsAI areas
