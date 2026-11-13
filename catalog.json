@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 2,
+  "areas": [],
+  "products": [
+    {
+      "id": "docsai",
+      "versions": [
+        {
+          "id": "v1",
+          "status": "supported",
+          "sections": [
+            {
+              "id": "get-started",
+              "title": "Get started",
+              "order": 10,
+              "description": "Install, set up and reach a first working result."
+            },
+            {
+              "id": "concepts",
+              "title": "Concepts",
+              "order": 20,
+              "description": "How the product works and why."
+            },
+            {
+              "id": "guides",
+              "title": "Guides",
+              "order": 30,
+              "description": "Task-oriented walkthroughs, migrations and upgrades."
+            },
+            {
+              "id": "integrations",
+              "title": "Integrations",
+              "order": 40,
+              "description": "Connect the product to frameworks, databases and providers."
+            },
+            {
+              "id": "features",
+              "title": "Features",
+              "order": 50,
+              "description": "One page or page family per optional capability."
+            },
+            {
+              "id": "reference",
+              "title": "Reference",
+              "order": 60,
+              "description": "Options, errors, answers and policies to look up."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "id": "getting-started",
+      "product": "docsai",
+      "version": "v1",
+      "slug": "getting-started",
+      "file": "docs/docsai/v1/getting-started.md",
+      "title": "Getting started",
+      "section": "get-started",
+      "classification": "public",
+      "lifecycle": "published",
+      "owner": "documentation-team",
+      "reviewDate": "2099-12-31",
+      "redirects": [],
+      "related": [],
+      "assets": []
+    }
+  ],
+  "assets": [],
+  "manuals": [],
+  "apis": [],
+  "schemas": [],
+  "collections": [],
+  "tests": [],
+  "playground": {
+    "environmentsFile": "playground/environments.yaml"
+  }
+}
