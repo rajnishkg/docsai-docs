@@ -1,0 +1,54 @@
+# Edit on GitHub
+
+You can change a page directly on GitHub, for a quick fix or when you are already working there. The commit reaches DocsAI when an admin chooses **Sync source**, and readers see it after review and publish.
+
+## Find the page
+
+Every page is a Markdown file under `docs/docsai/v1/<section>/<slug>.md` or `.mdx`. On the repository page, open `docs`, then `docsai`, `v1` and the section folder. The file name is the page slug: the page at `/docs/docsai/v1/connect-github/` is `docs/docsai/v1/tenant-admin/connect-github.mdx`.
+
+## Edit in the browser
+
+<Steps>
+
+<Step>
+
+## Open the editor
+
+Sign in to GitHub, open the file and choose the pencil icon (**Edit this file**). You need write access to the repository; without it, GitHub offers to fork it and open a pull request.
+
+</Step>
+
+<Step>
+
+## Change the text
+
+Edit the Markdown. Keep components in the canonical form: each tag alone on its line, a blank line inside the block, double-quoted attributes. See [Edit Markdown source](/docs/docsai/v1/markdown-source/).
+
+</Step>
+
+<Step>
+
+## Commit
+
+Choose **Commit changes**. Use a message in the form `docs(<section>): <change>`. Prefer **Create a new branch for this commit and start a pull request**, named `work/<you>/<topic>`, so a reviewer sees the change before it reaches the default branch. See [Work with pull requests](/docs/docsai/v1/pull-requests/).
+
+</Step>
+
+</Steps>
+
+## Bring the commit into DocsAI
+
+When the change is on the default branch (committed there or merged), an admin chooses **Sync source** in **Content**. Then the change goes through review and publish like any other commit. See [Sync changes from GitHub](/docs/docsai/v1/sync-changes-from-github/).
+
+<Callout type="warning" title="Edits to catalog.json">
+
+A page added on GitHub also needs its entry in `catalog.json`, and every image must be listed in `assets`. **Health** lists catalog and link problems of the default branch, and a release with errors is refused. Creating pages with **New page** in the console writes both for you.
+
+</Callout>
+
+## Next steps
+
+<Cards>
+<Card title="Edit locally with VS Code" href="/docs/docsai/v1/edit-locally-with-vs-code/" description="Clone, edit and push from your computer." />
+<Card title="Resolve conflicts" href="/docs/docsai/v1/resolve-conflicts/" description="When GitHub and your branch changed the same lines." />
+</Cards>

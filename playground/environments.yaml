@@ -1,6 +1,3 @@
 schemaVersion: 1
-environments:
-  - {id: mock, label: Local mock, kind: mock, baseUrl: null, enabled: false}
-  - {id: development, label: Development, kind: development, baseUrl: null, enabled: false}
-  - {id: staging, label: Staging, kind: staging, baseUrl: null, enabled: false}
-  - {id: production, label: Production, kind: production, baseUrl: null, enabled: false}
+# Repository-wide test servers. Each API in catalog.json can declare its own `environments`, which take precedence.
+environments: []

@@ -1,0 +1,114 @@
+# Create a documentation repository
+
+Create a new GitHub repository and its DocsAI project in one step from the console. DocsAI pushes one starter commit with a valid `catalog.json`, so the project opens right away.
+
+You need the **owner** role in the tenant and a verified GitHub connection. See [Connect GitHub](/docs/docsai/v1/connect-github/).
+
+<Steps>
+
+<Step>
+
+## Open Create project
+
+Choose **Repositories**, then **Create project**. The form **Create a DocsAI project** opens.
+
+![Create a DocsAI project form in Repositories](assets/docsai/v1/screenshots/create-documentation-repository/01-admin-open-create-project.png)
+
+</Step>
+
+<Step>
+
+## Describe the repository
+
+Fill in the form:
+
+| Field | Example | Notes |
+|---|---|---|
+| Enterprise provider | GitHub | The connection you verified. |
+| Owner / group | `rajnishkg` | The GitHub user or organization that will own the repository. |
+| Repository name | `docsai-docs` | Lowercase words joined by hyphens. |
+| Project name | `DocsAI docs` | The name people see in the console's **Project** list. |
+| Default branch | `main` | Published releases are built from this branch. |
+| Visibility | Public | **Private**, **Internal** or **Public** on GitHub. Reader pages are public either way once published. |
+
+![The form filled in for a public repository named docsai-docs](assets/docsai/v1/screenshots/create-documentation-repository/02-admin-fill-repository-details.png)
+
+</Step>
+
+<Step>
+
+## Create it
+
+Choose **Create project and repository** and confirm the dialog *Create rajnishkg/docsai-docs on GitHub? This will create the remote repository and push one DocsAI template commit.*
+
+DocsAI creates the repository, pushes the starter commit and opens the new project.
+
+</Step>
+
+</Steps>
+
+<Callout type="warning" title="QUOTA_EXCEEDED">
+
+If the tenant has reached its storage limit, creation stops with *QUOTA_EXCEEDED: This change needs … bytes, but the tenant uses … of its … bytes of storage.* Nothing is created on GitHub. Ask your platform operator to raise the limit (**Platform → Edit limits**), then try again. **Settings → Usage and limits** shows the current usage.
+
+</Callout>
+
+## What the starter commit contains
+
+| Path | Purpose |
+|---|---|
+| `catalog.json` | The catalog: one product `docsai`, version `v1`, the default sections and one starter page. |
+| `docs/docsai/v1/getting-started.md` | The starter page. |
+| `.github/CODEOWNERS` | Ownership rules. DocsAI maintains the block between `# BEGIN DocsAI areas` and `# END DocsAI areas`. |
+| `apis/`, `assets/`, `schemas/`, `playground/`, `manual-sources/` | Folders for API definitions, images, schemas, playground settings and PDF manuals, each with a README. |
+
+## Replace the starter content
+
+To start from your own content, clone the repository, replace the starter files and push one commit to the default branch. The commands below are the ones used to set up this site.
+
+<Tabs groupId="shell" persist="true">
+
+<TabItem value="bash" label="Bash">
+
+```bash
+git clone https://github.com/rajnishkg/docsai-docs.git
+cd docsai-docs
+git rm -q docs/docsai/v1/getting-started.md
+# copy your catalog.json, README.md, docs/, apis/ and playground/ into the clone
+git add -A
+git commit -m "docs(get-started): add the DocsAI user documentation"
+git push origin main
+```
+
+</TabItem>
+
+<TabItem value="powershell" label="PowerShell">
+
+```powershell
+git clone https://github.com/rajnishkg/docsai-docs.git
+Set-Location docsai-docs
+git rm -q docs/docsai/v1/getting-started.md
+# copy your catalog.json, README.md, docs/, apis/ and playground/ into the clone
+git add -A
+git commit -m "docs(get-started): add the DocsAI user documentation"
+git push origin main
+```
+
+</TabItem>
+
+</Tabs>
+
+Then open the project in the console and choose **Sync source**, so DocsAI picks up the new commit. See [Sync changes from GitHub](/docs/docsai/v1/sync-changes-from-github/).
+
+<Callout type="info" title="Pushing to main skips review">
+
+A direct push to the default branch is fine for the very first content. After that, change content on branches and through review, so every published commit has an approval.
+
+</Callout>
+
+## Next steps
+
+<Cards>
+<Card title="Sync changes from GitHub" href="/docs/docsai/v1/sync-changes-from-github/" description="Bring the new commit into the console." />
+<Card title="Manage users and roles" href="/docs/docsai/v1/users-and-roles/" description="Give writers and reviewers access." />
+</Cards>

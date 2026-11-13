@@ -1,0 +1,59 @@
+parameters:
+  - name: project
+    in: path
+    required: true
+    description: Project id.
+    schema: {type: string, format: uuid}
+get:
+  operationId: listBranches
+  tags: [Repository]
+  summary: List branches
+  description: Lists local branches and their provider copies, with who owns each personal branch.
+  responses:
+    '200':
+      description: Branches of the project repository.
+      content:
+        application/json:
+          schema: {$ref: ../components/schemas.yaml#/BranchList}
+          example:
+            branches:
+              - {name: main, head: 9a1f0c3d5e7b2a4c6e8f0a1b3c5d7e9f1a2b3c4d, remote: false, personal: false, owner: null, mine: false, writable: true}
+              - {name: work/author/components-page, head: 4c6e8f0a1b3c5d7e9f1a2b3c4d9a1f0c3d5e7b2a, remote: false, personal: true, owner: synthetic-author, mine: true, writable: true}
+            defaultBranch: main
+            sourceBase: 9a1f0c3d5e7b2a4c6e8f0a1b3c5d7e9f1a2b3c4d
+            me: {id: synthetic-author, slug: author, prefix: work/author/}
+    '404':
+      description: Unknown project, or not visible to you.
+      content:
+        application/json:
+          schema: {$ref: ../components/schemas.yaml#/Error}
+          example: {code: NOT_FOUND}
+post:
+  operationId: startEditing
+  tags: [Repository]
+  summary: Start a personal branch
+  description: Creates `work/<you>/<topic>` from the newest published base. This is what **Start editing** does in the console.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required: [topic]
+          additionalProperties: false
+          properties:
+            topic: {type: string, description: Lowercase words joined by hyphens., examples: [components-page]}
+        example: {topic: components-page}
+  responses:
+    '201':
+      description: Branch created.
+      content:
+        application/json:
+          schema: {$ref: ../components/schemas.yaml#/StartedBranch}
+          example: {branch: work/author/components-page, head: 9a1f0c3d5e7b2a4c6e8f0a1b3c5d7e9f1a2b3c4d, base: 9a1f0c3d5e7b2a4c6e8f0a1b3c5d7e9f1a2b3c4d, owner: synthetic-author, personal: true}
+    '409':
+      description: A branch with this topic already exists.
+      content:
+        application/json:
+          schema: {$ref: ../components/schemas.yaml#/Error}
+          example: {code: CONFLICT, message: Branch work/author/components-page already exists. Choose another topic or open it.}

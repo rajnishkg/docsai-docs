@@ -1,0 +1,60 @@
+# Edit Markdown source
+
+Markdown source shows the exact text of a page. Use it for tables, code and anything the visual editor cannot open. Both modes edit the same file.
+
+<Steps>
+
+<Step>
+
+## Switch to Markdown source
+
+Open the page from **Tracked files** and choose **Markdown source** in **Writing mode**. The source editor shows the page with Markdown highlighting.
+
+</Step>
+
+<Step>
+
+## Insert a component snippet
+
+Put the cursor on an empty line and choose a button in the **Insert block** toolbar: **Insert Callout**, **Insert Steps**, **Insert Tabs**, **Insert Cards** or **Insert Accordions**. The console inserts the component in the form the visual editor can open. Replace the sample text.
+
+</Step>
+
+<Step>
+
+## Preview
+
+Choose **Preview** or **Split** above the editor to see the page as readers will. The preview uses the same rules as the reader site.
+
+</Step>
+
+<Step>
+
+## Commit
+
+Type a **Commit message** and choose **Commit source changes**. The console validates the page before it commits: unknown components, unsafe HTML and broken links are refused with a message that names the problem.
+
+</Step>
+
+</Steps>
+
+## Write components the way the editor writes them
+
+Put each tag alone on its line, leave a blank line inside a block, and use double-quoted attributes. Pages written this way open in the visual editor too.
+
+```mdx title="docs/docsai/v1/writing/example.mdx"
+<Callout type="warning" title="Keep it private">
+
+Never paste a token into a page.
+
+</Callout>
+```
+
+The **Use reader components** page in this section shows every component with its source.
+
+## Next steps
+
+<Cards>
+<Card title="Change page settings" href="/docs/docsai/v1/page-settings/" description="Description, section, page type and order." />
+<Card title="Submit for review" href="/docs/docsai/v1/submit-for-review/" description="Commit and submit the exact commit." />
+</Cards>

@@ -1,0 +1,60 @@
+# Work with pull requests
+
+A console branch lives in DocsAI until you push it. **Push & open PR** pushes it to GitHub and opens a pull request, so people who work on GitHub can review it there too.
+
+Publishing in DocsAI and merging on GitHub are separate. A typical order is: approve and publish in DocsAI, push and open the pull request, merge it on GitHub, then **Sync source**.
+
+<Steps>
+
+<Step>
+
+## Push the branch
+
+On your branch in **Content** (not the default branch), choose **Push & open PR** in the **GitHub Enterprise workflow** box. DocsAI pushes the exact commit without force and opens a pull request, or reuses the open one for the same branch. The status links to the pull request.
+
+</Step>
+
+<Step>
+
+## Review on GitHub
+
+The pull request lists the commits and changed files. GitHub asks the teams named in `CODEOWNERS` for review when the change touches their areas.
+
+</Step>
+
+<Step>
+
+## Merge on GitHub
+
+Merge the pull request on GitHub, or with the GitHub CLI:
+
+```bash title="Terminal"
+gh pr merge 1 --merge
+```
+
+Use a merge commit or a squash, never a force-push to the default branch: sync only moves forward.
+
+</Step>
+
+<Step>
+
+## Sync the console
+
+An admin chooses **Sync source** on the default branch. Other open branches then choose **Update from published base**. See [Sync changes from GitHub](/docs/docsai/v1/sync-changes-from-github/).
+
+</Step>
+
+</Steps>
+
+## If the push fails
+
+- On the default branch the box says *Create a non-default working branch before pushing for provider review.* Choose **Start editing** first: the console never pushes the default branch.
+- If the branch moved since you loaded it, the push is refused. Reload and push again.
+- If the push succeeded but GitHub did not create the pull request, choose **Push & open PR** again. DocsAI reuses the pushed commit and creates or finds the pull request.
+
+## Next steps
+
+<Cards>
+<Card title="Resolve conflicts" href="/docs/docsai/v1/resolve-conflicts/" description="When the pull request and main changed the same lines." />
+<Card title="Edit on GitHub" href="/docs/docsai/v1/edit-on-github/" description="Change a page in the GitHub web editor." />
+</Cards>

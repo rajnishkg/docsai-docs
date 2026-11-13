@@ -1,0 +1,55 @@
+openapi: 3.1.0
+info:
+  title: Billing sample API
+  version: v1
+  summary: A sample private API. It shows how DocsAI keeps an internal API inside the console.
+  description: |
+    A small, made-up billing API used to demonstrate private APIs in DocsAI. Its catalog entry is
+    `classification: protected`, so it is never part of a reader release. Signed-in console users read
+    it in Schema Studio (Reference) and try it there (Test).
+
+    All data in the examples is synthetic.
+  contact:
+    name: DocsAI documentation team
+    url: https://github.com/rajnishkg/docsai-docs
+servers:
+  - url: https://billing.example.invalid/v1
+    description: Example host (does not resolve)
+tags:
+  - name: Invoices
+    description: Invoices issued to a customer account.
+security:
+  - bearerToken: []
+paths:
+  /invoices:
+    $ref: ./paths/invoices.yaml
+  /invoices/{invoiceId}:
+    $ref: ./paths/invoice.yaml
+components:
+  securitySchemes:
+    bearerToken:
+      type: http
+      scheme: bearer
+      description: An access token from your identity provider. Never paste a real token into a page.
+  schemas:
+    Invoice:
+      type: object
+      required: [id, customer, status, total]
+      properties:
+        id: {type: string, examples: [inv_0001]}
+        customer: {type: string, examples: [cus_example]}
+        status:
+          type: string
+          enum: [draft, open, paid, void]
+        currency: {type: string, examples: [EUR]}
+        total:
+          type: integer
+          description: Amount in the smallest currency unit.
+          examples: [12900]
+        issuedAt: {type: string, format: date}
+    Error:
+      type: object
+      required: [code]
+      properties:
+        code: {type: string, examples: [NOT_FOUND]}
+        message: {type: string}

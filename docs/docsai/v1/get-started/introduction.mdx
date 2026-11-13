@@ -1,0 +1,28 @@
+# Introduction
+
+DocsAI turns a Git repository into a reviewed, versioned documentation site. Writers work in a browser console, every change is a commit on a branch, and a page reaches readers only after a reviewer approved that exact commit.
+
+This site is itself a DocsAI project: its pages, screenshots and sample APIs live in the public repository [rajnishkg/docsai-docs](https://github.com/rajnishkg/docsai-docs), and every page here went through the steps it describes.
+
+## Who this is for
+
+- **Tenant admins** connect GitHub, create or import the documentation repository, give people access and publish the reader site.
+- **Authors** write and change pages in the visual editor or in Markdown, and submit their change for review.
+- **Reviewers** read the exact change, then approve it or ask for changes.
+- **Readers** open the published site. It has no login, and it only ever shows public, published pages.
+
+## What you get
+
+- **Your repository is the source.** Pages are Markdown files in your own GitHub repository. Leaving DocsAI means keeping your repository.
+- **Review before publish.** An approval belongs to one commit. Publishing anything else is refused.
+- **A catalog, not a folder scan.** `catalog.json` lists every page with its owner, section, review date, classification and lifecycle, so drafts and protected pages never reach readers.
+- **API references you can try.** OpenAPI definitions become reference pages with **Test Request**, answered by a mock or sandbox server.
+
+## Choose your path
+
+<Cards>
+<Card title="Admin quickstart" href="/docs/docsai/v1/admin-quickstart/" description="Connect GitHub, create the repository, grant access and publish." />
+<Card title="Author quickstart" href="/docs/docsai/v1/author-quickstart/" description="Write a page, submit it and see it published." />
+<Card title="How DocsAI works" href="/docs/docsai/v1/how-docsai-works/" description="The path of a change from a branch to readers." />
+<Card title="Publish an OpenAPI definition" href="/docs/docsai/v1/publish-an-openapi-definition/" description="Turn an API definition into a reference readers can try." />
+</Cards>

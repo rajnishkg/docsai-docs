@@ -1,0 +1,87 @@
+# catalog.json
+
+`catalog.json` at the repository root lists everything DocsAI publishes: products and versions, the sections of each version, every page, image and API. A file that is not in the catalog is never published.
+
+## Top level
+
+```json title="catalog.json"
+{
+  "schemaVersion": 2,
+  "areas": [],
+  "products": [],
+  "documents": [],
+  "assets": [],
+  "manuals": [],
+  "apis": [],
+  "schemas": [],
+  "collections": [],
+  "tests": [],
+  "playground": {"environmentsFile": "playground/environments.yaml"}
+}
+```
+
+Schema version 2 needs every one of these arrays, even when empty, and the `playground` object. `playground/environments.yaml` must exist.
+
+## products
+
+```json
+{"id": "docsai", "title": "DocsAI", "versions": [
+  {"id": "v1", "status": "supported", "current": true, "sections": [
+    {"id": "get-started", "title": "Get started", "order": 10, "icon": "rocket", "description": "What DocsAI is, how it works, and the shortest path for admins and authors."}
+  ]}
+]}
+```
+
+| Field | Rule |
+|---|---|
+| `versions[].status` | `supported` or `deprecated`. A deprecated version needs a `migrationUrl`. |
+| `versions[].current` | At most one current version per product. The version id `latest` is reserved. |
+| `sections[]` | Up to 32, each `{id, title, order?, description?, icon?}`. The title is plain text, at most 80 characters. |
+
+## documents
+
+| Field | Required | Rule |
+|---|---|---|
+| `id`, `slug` | yes | Lowercase tokens. The address is `docs/<product>/<version>/<slug>/`. |
+| `product`, `version` | yes | A declared product and version. |
+| `file` | yes | The `.md` or `.mdx` file. |
+| `title` | yes | Plain text. |
+| `description` | no | One plain sentence, at most 200 characters. |
+| `section` | no | A section the version declares. |
+| `order` | no | A number; sorts pages inside the section. |
+| `pageType` | no | One of the page templates, such as `quickstart` or `faq`. |
+| `classification` | yes | `public` or `protected`. |
+| `lifecycle` | yes | `draft`, `in-review`, `published` or `archived`. |
+| `owner` | yes | Plain text, usually a team. |
+| `reviewDate` | yes | `YYYY-MM-DD`. A passed date is reported in **Health**. |
+| `assets` | no | Every image the page shows, by repository path. |
+| `related`, `redirects` | no | Related document keys; old slugs that should redirect here. |
+
+Only `public` and `published` documents are in a release.
+
+## assets
+
+```json
+{"file": "assets/docsai/v1/screenshots/connect-github/01-admin-choose-identity.png", "classification": "public", "mime": "image/png"}
+```
+
+The `mime` must match the extension (`.png`, `.jpg`, `.webp`, `.gif`, `.pdf`, `.txt`). In a page, reference the image by its repository path:
+
+```md
+![Active identity set to admin](assets/docsai/v1/screenshots/connect-github/01-admin-choose-identity.png)
+```
+
+## apis
+
+See [Publish an OpenAPI definition](/docs/docsai/v1/publish-an-openapi-definition/) for a full entry. The fields beyond those of a document are `kind` (`openapi`), `bundleRoot`, `bundleFiles`, `documentationFiles` and `environments`.
+
+## areas
+
+`[{"path": "apis/docsai/billing-sample/", "team": "api"}]`. Written by **Save areas and CODEOWNERS**; see [Assign ownership areas](/docs/docsai/v1/ownership-areas/).
+
+## Next steps
+
+<Cards>
+<Card title="Naming conventions" href="/docs/docsai/v1/naming-conventions/" description="Tokens, files, branches and screenshots." />
+<Card title="Change page settings" href="/docs/docsai/v1/page-settings/" description="Edit catalog fields from the console." />
+</Cards>

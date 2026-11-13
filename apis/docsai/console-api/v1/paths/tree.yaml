@@ -1,0 +1,38 @@
+parameters:
+  - name: project
+    in: path
+    required: true
+    description: Project id.
+    schema: {type: string, format: uuid}
+get:
+  operationId: getTree
+  tags: [Repository]
+  summary: List tracked files of a branch
+  description: Returns the files of a branch with the catalog view of its documents, areas and review state.
+  parameters:
+    - name: branch
+      in: query
+      required: true
+      description: Branch name, for example `main` or `work/author/components-page`.
+      schema: {type: string}
+  responses:
+    '200':
+      description: Files and catalog summary.
+      content:
+        application/json:
+          schema: {$ref: ../components/schemas.yaml#/Tree}
+          example:
+            branch: main
+            head: 9a1f0c3d5e7b2a4c6e8f0a1b3c5d7e9f1a2b3c4d
+            areas: [{path: docs/docsai/v1/api-docs/, team: api}]
+            files:
+              - {path: catalog.json, blob: 03e4114f94f065351fbc72f4ca24d6e093555185, mode: '100644', editable: false, area: null}
+              - {path: docs/docsai/v1/writing/create-a-page.md, blob: 361c9fa2c074548bb766cb14f6bf5b9a57a3488a, mode: '100644', editable: true, area: null}
+            documents: []
+            review: {status: draft, commit: 9a1f0c3d5e7b2a4c6e8f0a1b3c5d7e9f1a2b3c4d}
+    '404':
+      description: Unknown project or branch.
+      content:
+        application/json:
+          schema: {$ref: ../components/schemas.yaml#/Error}
+          example: {code: NOT_FOUND}

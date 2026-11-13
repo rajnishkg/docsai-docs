@@ -1,0 +1,44 @@
+# Import a repository
+
+Open an existing GitHub repository as a DocsAI project. The repository must already have a valid `catalog.json` at its root on the default branch.
+
+You need the **owner** role in the tenant and a verified GitHub connection. See [Connect GitHub](/docs/docsai/v1/connect-github/).
+
+<Steps>
+
+<Step>
+
+## Browse the provider
+
+Choose **Repositories**, then **Connect repository**. Make sure the provider shows **Verified at last check**, then choose **Browse repositories**. DocsAI lists the repositories the connection can read, up to 30 at a time. Type in **Find provider repository** to narrow the list, and choose **Load more** to see more.
+
+</Step>
+
+<Step>
+
+## Import and open
+
+Choose **Import & open** next to the repository. DocsAI clones it, validates the catalog and opens the new project in **Content**.
+
+</Step>
+
+</Steps>
+
+If the repository is already connected in your tenant, DocsAI reuses that connection. To work on the same repository in a second, separate working copy, choose **New working copy** on its card in **Repositories**.
+
+## When import is refused
+
+| Message | Cause | Fix |
+|---|---|---|
+| CATALOG_REQUIRED | No valid `catalog.json` on the default branch. | Add one (see [catalog.json](/docs/docsai/v1/catalog-json/)), push, and import again. |
+| Empty repository | The repository has no default branch yet. | Push a first commit. |
+| QUOTA_EXCEEDED | The tenant reached a limit. | Ask your platform operator to raise it. |
+
+After import, **Health** lists every remaining catalog, link and API problem of the default branch, with a **Go to file** button for each.
+
+## Next steps
+
+<Cards>
+<Card title="Manage users and roles" href="/docs/docsai/v1/users-and-roles/" description="Give writers and reviewers access to the project." />
+<Card title="Publish the reader site" href="/docs/docsai/v1/publish-the-reader-site/" description="Publish the first release." />
+</Cards>

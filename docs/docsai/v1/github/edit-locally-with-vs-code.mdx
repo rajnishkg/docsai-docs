@@ -1,0 +1,73 @@
+# Edit locally with VS Code
+
+Clone the repository, edit pages in VS Code or any editor, and push a branch. Use this for large changes, many files, or screenshots.
+
+You need Git, an editor, and write access to the repository on GitHub.
+
+<Steps>
+
+<Step>
+
+## Clone the repository
+
+```bash title="Terminal"
+git clone https://github.com/rajnishkg/docsai-docs.git
+cd docsai-docs
+```
+
+</Step>
+
+<Step>
+
+## Start a branch
+
+Name the branch `work/<you>/<topic>`, the same pattern the console uses.
+
+```bash title="Terminal"
+git switch -c work/docs/screenshots
+```
+
+</Step>
+
+<Step>
+
+## Edit in VS Code
+
+Open the folder with `code .`. Pages are under `docs/docsai/v1/`, screenshots under `assets/docsai/v1/screenshots/<page-slug>/`. When you add a page or an image, add it to `catalog.json` too: a page under `documents`, an image under `assets` and in the page's own `assets` list.
+
+</Step>
+
+<Step>
+
+## Commit and push
+
+```bash title="Terminal"
+git add -A
+git commit -m "docs(writing): add screenshots to the writing pages"
+git push -u origin work/docs/screenshots
+```
+
+</Step>
+
+<Step>
+
+## Open a pull request
+
+Open the link Git prints, or use the GitHub CLI:
+
+```bash title="Terminal"
+gh pr create --base main --head work/docs/screenshots --title "docs(writing): add screenshots" --body "Screenshots for the writing pages."
+```
+
+After the pull request is merged, an admin chooses **Sync source** in the console, and the change goes through review and publish.
+
+</Step>
+
+</Steps>
+
+## Next steps
+
+<Cards>
+<Card title="Work with pull requests" href="/docs/docsai/v1/pull-requests/" description="Review, merge and sync." />
+<Card title="Naming conventions" href="/docs/docsai/v1/naming-conventions/" description="Files, branches, commits and screenshots." />
+</Cards>

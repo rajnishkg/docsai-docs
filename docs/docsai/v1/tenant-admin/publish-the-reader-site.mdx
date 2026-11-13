@@ -1,0 +1,62 @@
+# Publish the reader site
+
+Publishing builds an immutable release from one approved commit and makes it the version readers see. The reader site is public and has no login.
+
+You need the **publish** permission (the **publisher** or **owner** role). The commit must already be approved; see [Review and approve](/docs/docsai/v1/review-and-approve/).
+
+<Steps>
+
+<Step>
+
+## Open the approved branch
+
+Choose **Content**, choose the project, and select the branch in **Working branch**. **Before you can publish** lists anything still missing, such as an approval.
+
+</Step>
+
+<Step>
+
+## Publish
+
+Choose **Publish approved commit to current guides**. The console answers *Publication queued. Status updates automatically.* The build runs in the background; you can leave the page.
+
+</Step>
+
+<Step>
+
+## Follow the build
+
+Choose **Deployments**. The job shows its source commit and its state. When it says **published**, choose **Open published documentation ↗**.
+
+</Step>
+
+<Step>
+
+## Check the site address
+
+In **Settings → Reader site**, **Reader address** is your tenant's reader origin, and **Project site** shows where this project is published, for example `http://acme.docs.localhost:4174/docsai-docs/`. Change the last part with **Site slug** and **Save site slug**.
+
+</Step>
+
+</Steps>
+
+## What readers get
+
+- Only pages whose catalog entry is `public` and `published`. Drafts, pages in review, archived and `protected` pages are never in a release.
+- The sidebar grouped by the version's sections, each with its icon, and each page's description under its title.
+- A Markdown copy of every page (`<page>.md`), search, and the API reference with **Test Request**.
+
+Every release also keeps its own address, so a link to an older release keeps working.
+
+<Callout type="info" title="Custom domain">
+
+To serve the site on your own host, enter it under **Custom domain** and choose **Request custom domain**. It is served once your platform operator approves it. Put the reader behind your own TLS proxy.
+
+</Callout>
+
+## Next steps
+
+<Cards>
+<Card title="Sync changes from GitHub" href="/docs/docsai/v1/sync-changes-from-github/" description="Pick up commits made on GitHub." />
+<Card title="Introduction" href="/docs/docsai/v1/introduction/" description="Back to the start of this site." />
+</Cards>

@@ -1,0 +1,71 @@
+# Naming conventions
+
+Names in this repository follow a few rules, so anyone can find a file from its address and tell what a branch or commit does from its name.
+
+## Tokens
+
+Every id, slug, folder and file name is a **lowercase-kebab token**: `a-z`, `0-9` and `-`, for example `connect-github`. No spaces, capitals or underscores.
+
+## Pages
+
+| What | Rule | Example |
+|---|---|---|
+| File name | The slug, plus `.md` or `.mdx` | `connect-github.mdx` |
+| Slug | Unique in the version; names the page for the reader | `create-documentation-repository` |
+| Folder | The section id | `docs/docsai/v1/tenant-admin/` |
+| Address | Always `docs/<product>/<version>/<slug>/` | `/docs/docsai/v1/connect-github/` |
+| Title, task page | Starts with a verb | *Connect GitHub*, *Resolve conflicts* |
+| Title, other page | A noun phrase | *Naming conventions*, *FAQ* |
+| Description | One plain sentence, at most 200 characters | *Check the GitHub provider connection of your tenant…* |
+
+The first line of a page is `# <title>`, the same as `title` in `catalog.json`.
+
+## Sections
+
+| Section id | Title | Icon |
+|---|---|---|
+| `get-started` | Get started | `rocket` |
+| `tenant-admin` | Tenant admin | `settings` |
+| `writing` | Writing | `file-text` |
+| `github` | GitHub | `plug` |
+| `api-docs` | API docs | `code` |
+| `reference` | Reference | `book` |
+
+Allowed icons: `rocket`, `book`, `layers`, `compass`, `plug`, `puzzle`, `wrench`, `code`, `database`, `shield`, `settings`, `sparkles`, `file-text`, `list`.
+
+## Branches and commits
+
+| What | Rule | Example |
+|---|---|---|
+| Branch | `work/<user>/<topic>` | `work/author/components-page` |
+| Commit message | `docs(<section>): <change>`, imperative, one line | `docs(writing): add the components page` |
+
+The console names branches this way when you choose **Start editing**. Use the same pattern on your computer.
+
+## Screenshots
+
+Screenshots live in `assets/<product>/<version>/screenshots/<page-slug>/` and are named `NN-<role>-<action>.png`:
+
+- `NN`: two digits, the click order inside the page (`01`, `02`, …).
+- `<role>`: who performs the step: `admin`, `author`, `reviewer` or `reader`.
+- `<action>`: what the step does, as a token: `verify-provider`, `submit-commit`.
+
+```text title="assets/docsai/v1/screenshots/connect-github/"
+01-admin-choose-identity.png
+02-admin-provider-connections.png
+03-admin-connect-repository.png
+04-admin-verify-provider.png
+```
+
+Capture at 1440 × 900 with the control you click on screen. Place each screenshot right after the step it shows, and give it alt text that says what it shows. List every screenshot in `catalog.json` under `assets` and in the page's own `assets`.
+
+## APIs
+
+API bundles live in `apis/<product>/<api-id>/<version>/`, with `openapi.yaml`, `paths/`, `components/` and `content/`. The API id is also its slug: `console-api`.
+
+## Next steps
+
+<Cards>
+<Card title="catalog.json" href="/docs/docsai/v1/catalog-json/" description="Every catalog field." />
+<Card title="Create a page" href="/docs/docsai/v1/create-a-page/" description="New page applies these rules for you." />
+</Cards>

@@ -1,0 +1,83 @@
+# Publish an OpenAPI definition
+
+Add an OpenAPI definition to the repository and list it in `catalog.json`. Each release then includes an API reference page with **Test Request**, built from the exact reviewed commit. This site publishes the [DocsAI console API](/docs/docsai/v1/console-api/) this way.
+
+## Lay out the API bundle
+
+Keep each API version in its own folder under `apis/<product>/<api-id>/<version>/`:
+
+```text title="apis/docsai/console-api/v1/"
+openapi.yaml            entry point: info, servers, tags, security, paths
+paths/*.yaml            one file per path, referenced with $ref
+components/schemas.yaml shared schemas
+content/overview.md     guides shown with the reference
+content/authentication.md
+content/errors.md
+```
+
+References must be local files inside the bundle. Remote `$ref`s are never fetched and fail validation.
+
+<Steps>
+
+<Step>
+
+## Write the definition
+
+Use OpenAPI 3.1 (3.0 works too). Give every operation an `operationId`, a `summary`, a `description`, a tag and at least one response with an `example`. Examples are what the mock server answers and what readers see.
+
+```yaml title="apis/docsai/console-api/v1/openapi.yaml"
+openapi: 3.1.0
+info:
+  title: DocsAI console API
+  version: v1
+paths:
+  /api/projects:
+    $ref: ./paths/projects.yaml
+```
+
+</Step>
+
+<Step>
+
+## Add the catalog entry
+
+Add the API to `apis` in `catalog.json`. `bundleFiles` lists every YAML file of the bundle, and `documentationFiles` the Markdown guides under `content/`.
+
+```json title="catalog.json"
+{
+  "id": "console-api", "product": "docsai", "version": "v1", "slug": "console-api",
+  "kind": "openapi", "title": "DocsAI console API",
+  "file": "apis/docsai/console-api/v1/openapi.yaml",
+  "bundleRoot": "apis/docsai/console-api/v1",
+  "bundleFiles": ["apis/docsai/console-api/v1/openapi.yaml", "apis/docsai/console-api/v1/paths/projects.yaml"],
+  "documentationFiles": ["apis/docsai/console-api/v1/content/overview.md"],
+  "classification": "public", "lifecycle": "published",
+  "owner": "documentation-team", "reviewDate": "2027-11-13",
+  "environments": [{"id": "mock", "label": "Local mock", "kind": "mock", "baseUrl": "http://127.0.0.1:4020", "enabled": true}]
+}
+```
+
+</Step>
+
+<Step>
+
+## Commit, review and publish
+
+Commit on a branch, submit, get approval and publish, like a page. The release validates the definition and every reference. The reference appears at `docs/<product>/<version>/<slug>/`, here `/docs/docsai/v1/console-api/`.
+
+</Step>
+
+</Steps>
+
+<Callout type="info" title="Public or private">
+
+Only an API with `"classification": "public"` and `"lifecycle": "published"` reaches readers. For an internal API use `"classification": "protected"`. See [Keep an API private](/docs/docsai/v1/private-apis/).
+
+</Callout>
+
+## Next steps
+
+<Cards>
+<Card title="Declare test servers" href="/docs/docsai/v1/test-servers/" description="Give readers a mock to send requests to." />
+<Card title="Send a test request" href="/docs/docsai/v1/test-request/" description="Try an operation from the reference." />
+</Cards>
