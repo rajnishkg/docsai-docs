@@ -1,0 +1,210 @@
+Error:
+  type: object
+  description: Every failed request returns a stable code and, for most codes, a readable message.
+  required: [code]
+  properties:
+    code:
+      type: string
+      description: Stable error code, for example `ACCESS_DENIED`, `CONFLICT` or `VALIDATION_FAILED`.
+      examples: [CONFLICT]
+    message:
+      type: string
+      description: Explanation for people. Do not parse it.
+      examples: [The branch moved. Reload before creating a branch.]
+    paths:
+      type: array
+      description: Files involved in a conflict, when the code is `CONFLICT` or `MERGE_CONFLICT`.
+      items: {type: string}
+Principal:
+  type: object
+  required: [id, tenant]
+  properties:
+    id: {type: string, description: Principal id from the identity provider., examples: [synthetic-author]}
+    tenant: {type: string, description: Tenant id., examples: [acme]}
+    name: {type: string, description: Display name., examples: [author]}
+Session:
+  type: object
+  required: [principal, capabilities]
+  properties:
+    principal:
+      oneOf:
+        - $ref: '#/Principal'
+        - type: 'null'
+    platformAdmin: {type: boolean, description: True only for platform operators.}
+    tenant:
+      type: [object, 'null']
+      properties:
+        id: {type: string, examples: [acme]}
+        name: {type: string, examples: [Acme Corporation]}
+        readerOrigin: {type: string, format: uri, examples: ['http://acme.docs.localhost:4174']}
+    capabilities:
+      type: array
+      description: Permissions evaluated for the person, on the project when `project` is given.
+      items:
+        type: string
+        enum: [draft, review, publish, workspace, manage-access, read-insights, read, search]
+    needsTeam: {type: boolean, description: True when the person belongs to no team yet.}
+    demo: {type: boolean, description: True on the local demo console with synthetic identities.}
+Project:
+  type: object
+  required: [id, kind, name]
+  properties:
+    id: {type: string, format: uuid, examples: [3f1c2b9e-7d4a-4c1e-9a55-0b8d2e6f4a10]}
+    kind: {type: string, description: '`repository` for Git-backed projects.', examples: [repository]}
+    name: {type: string, examples: [DocsAI docs]}
+    branch: {type: string, description: Default branch of the source repository., examples: [main]}
+    head: {type: string, description: Commit at the head of the default branch., examples: [9a1f0c3d5e7b2a4c6e8f0a1b3c5d7e9f1a2b3c4d]}
+    sourceBase: {type: string, description: Published base commit that new branches start from.}
+    product: {type: string, examples: [docsai]}
+    version: {type: string, examples: [v1]}
+    siteSlug: {type: string, description: Path of the project site on the tenant reader., examples: [docsai-docs]}
+    activeRelease: {type: string, description: Id of the release readers see now.}
+    createdAt: {type: string, format: date-time}
+Branch:
+  type: object
+  required: [name, head]
+  properties:
+    name: {type: string, examples: [work/author/components-page]}
+    head: {type: string, description: Commit at the branch head.}
+    remote: {type: boolean, description: True for the provider copy (`origin/...`).}
+    personal: {type: boolean, description: True for a `work/<user>/<topic>` branch started in the console.}
+    owner: {type: [string, 'null'], examples: [synthetic-author]}
+    mine: {type: boolean}
+    writable: {type: boolean, description: False for another person's personal branch.}
+BranchList:
+  type: object
+  required: [branches, defaultBranch]
+  properties:
+    branches:
+      type: array
+      items: {$ref: '#/Branch'}
+    defaultBranch: {type: string, examples: [main]}
+    sourceBase: {type: string}
+    me:
+      type: object
+      properties:
+        id: {type: string, examples: [synthetic-author]}
+        slug: {type: string, examples: [author]}
+        prefix: {type: string, examples: [work/author/]}
+StartedBranch:
+  type: object
+  required: [branch, head]
+  properties:
+    branch: {type: string, examples: [work/author/components-page]}
+    head: {type: string}
+    base: {type: string}
+    owner: {type: string, examples: [synthetic-author]}
+    personal: {type: boolean, examples: [true]}
+TreeFile:
+  type: object
+  required: [path, blob, editable]
+  properties:
+    path: {type: string, examples: [docs/docsai/v1/writing/create-a-page.md]}
+    blob: {type: string, description: Git blob id. Send it back as `expectedBlob` when you save.}
+    mode: {type: string, examples: ['100644']}
+    editable: {type: boolean, description: True for cataloged pages and versioned API, schema and playground text files.}
+    area: {type: [string, 'null'], description: Team that owns the file through an area., examples: [writers]}
+Tree:
+  type: object
+  required: [branch, head, files]
+  properties:
+    branch: {type: string, examples: [main]}
+    head: {type: string}
+    areas:
+      type: array
+      items:
+        type: object
+        properties:
+          path: {type: string, examples: [docs/docsai/v1/api-docs/]}
+          team: {type: string, examples: [api]}
+    files:
+      type: array
+      items: {$ref: '#/TreeFile'}
+    documents:
+      type: array
+      description: Catalog documents with their section, order, lifecycle and classification.
+      items: {type: object}
+    review:
+      type: object
+      description: Review state of the branch head.
+      properties:
+        status: {type: string, examples: [draft]}
+        commit: {type: string}
+FileContent:
+  type: object
+  required: [branch, head, path, blob, body]
+  properties:
+    branch: {type: string, examples: [main]}
+    head: {type: string}
+    path: {type: string, examples: [docs/docsai/v1/writing/create-a-page.md]}
+    blob: {type: string}
+    body: {type: string, examples: ["# Create a page\n\nStart a branch, then choose New page.\n"]}
+    editable: {type: boolean, examples: [true]}
+    byteLimit: {type: [integer, 'null'], examples: [1048576]}
+SaveFile:
+  type: object
+  required: [branch, path, body, message, expectedHead, expectedBlob]
+  properties:
+    branch: {type: string, examples: [work/author/components-page]}
+    path: {type: string, examples: [docs/docsai/v1/writing/create-a-page.md]}
+    body: {type: string, description: Full new file text (UTF-8, at most 1 MiB)., examples: ["# Create a page\n\nUpdated text.\n"]}
+    message: {type: string, maxLength: 500, description: One-line commit message., examples: ['docs(writing): clarify the New page form']}
+    expectedHead: {type: string, description: Branch head you loaded.}
+    expectedBlob: {type: string, description: Blob id of the file you loaded.}
+Diff:
+  type: object
+  required: [branch, head, base, diff]
+  properties:
+    branch: {type: string}
+    head: {type: string}
+    base: {type: string, description: Merge base with the published base.}
+    sourceBase: {type: string}
+    behind: {type: boolean, description: True when the published base moved after the branch started.}
+    diff: {type: string, description: Unified Git diff from the base to the branch head.}
+ReviewRequest:
+  type: object
+  required: [branch, expectedHead, action]
+  properties:
+    branch: {type: string, examples: [work/author/components-page]}
+    expectedHead: {type: string, description: The exact commit you submit or decide on.}
+    action:
+      type: string
+      enum: [submit, approve, request-changes]
+    comment: {type: string, maxLength: 2000}
+Review:
+  type: object
+  required: [status, commit]
+  properties:
+    status: {type: string, examples: [approved]}
+    decision: {type: string, examples: [approve]}
+    commit: {type: string, description: The reviewed commit. A later commit needs a new review.}
+    branch: {type: string}
+ReaderPage:
+  type: object
+  properties:
+    project: {type: string, format: uuid}
+    projectName: {type: string, examples: [DocsAI docs]}
+    url: {type: string, format: uri, examples: ['http://acme.docs.localhost:4174/docsai-docs/docs/docsai/v1/console-api/']}
+Notification:
+  type: object
+  required: [id, at, type, read]
+  properties:
+    id: {type: integer, examples: [17]}
+    at: {type: string, format: date-time}
+    read: {type: boolean}
+    type:
+      type: string
+      examples: [review.requested]
+      description: One of review.requested, review.decided, publish.waiting, publish.completed, reader.issue, comment.created.
+    actor: {type: string, examples: [synthetic-reviewer]}
+    title: {type: string, examples: [work/author/components-page]}
+    project: {type: string, format: uuid}
+    projectName: {type: string, examples: [DocsAI docs]}
+Inbox:
+  type: object
+  required: [unread, items]
+  properties:
+    unread: {type: integer, examples: [2]}
+    items:
+      type: array
+      items: {$ref: '#/Notification'}

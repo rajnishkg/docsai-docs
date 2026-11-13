@@ -1,0 +1,54 @@
+# Change page settings
+
+Page settings hold everything about a page that is not its text: title, owner, classification, lifecycle, review date, reader section, page type, order and description. They live in the page's `catalog.json` entry.
+
+<Steps>
+
+<Step>
+
+## Open Page settings
+
+On your branch, open the page from **Tracked files** and expand **Page settings · published** (the summary shows the current lifecycle) below the editor.
+
+</Step>
+
+<Step>
+
+## Change the fields
+
+| Field | What it does |
+|---|---|
+| Page title | The title in the sidebar and above the page. |
+| Owner | The team responsible for the page. |
+| Classification | **Public** pages can be published; **Private** (`protected`) pages never reach readers. |
+| Lifecycle | **Draft**, **In review**, **Published** or **Archived**. Only Published pages are in a release. |
+| Review date | When the page must be checked again. A passed date shows in **Health**. |
+| Reader section | The sidebar group. Moving a page never changes its address. |
+| Page type | The template the page follows. The editor's **Page template** check then shows missing sections. |
+| Order in section | Position inside the section: lower numbers first. |
+| Page description | One plain sentence, at most 200 characters, shown under the title and used as the search description. |
+
+</Step>
+
+<Step>
+
+## Save
+
+Choose **Save page settings**. The console writes a catalog-only commit to your branch. It starts a new review cycle like any other commit.
+
+</Step>
+
+</Steps>
+
+<Callout type="info" title="Commit text changes first">
+
+**Save page settings** is unavailable while the editor has uncommitted text. Commit your text, then change the settings.
+
+</Callout>
+
+## Next steps
+
+<Cards>
+<Card title="Submit for review" href="/docs/docsai/v1/submit-for-review/" description="Submit the exact commit." />
+<Card title="catalog.json" href="/docs/docsai/v1/catalog-json/" description="Every catalog field." />
+</Cards>

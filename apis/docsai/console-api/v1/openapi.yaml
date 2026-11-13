@@ -1,0 +1,74 @@
+openapi: 3.1.0
+info:
+  title: DocsAI console API
+  version: v1
+  summary: Session, projects, repository branches and files, review, reader pages and notifications.
+  description: |
+    The DocsAI console is a same-origin web application. Its HTTP API is what the console itself calls:
+    every request runs as the signed-in person, inside that person's tenant, with the permissions of
+    their teams.
+
+    This definition covers a stable subset of the routes that tools and scripts use most: the session,
+    the project list, repository branches, files and diffs, the review action, reader pages that embed an
+    API, and the notification inbox.
+
+    Write requests must be JSON (`Content-Type: application/json`) and come from the console origin.
+  contact:
+    name: DocsAI documentation team
+    url: https://github.com/rajnishkg/docsai-docs
+  license:
+    name: CC BY 4.0
+    identifier: CC-BY-4.0
+servers:
+  - url: http://127.0.0.1:4175
+    description: Local DocsAI console
+tags:
+  - name: Session
+    description: Who is signed in and what they may do.
+  - name: Projects
+    description: Documentation projects of the tenant.
+  - name: Repository
+    description: Branches, files, diffs and review of a repository-backed project.
+  - name: Reader
+    description: Reader pages that embed a Schema Studio API.
+  - name: Notifications
+    description: The bell in the console header.
+security:
+  - consoleSession: []
+  - serviceToken: []
+paths:
+  /api/session:
+    $ref: ./paths/session.yaml
+  /api/projects:
+    $ref: ./paths/projects.yaml
+  /api/projects/{project}/repository/branches:
+    $ref: ./paths/branches.yaml
+  /api/projects/{project}/repository/tree:
+    $ref: ./paths/tree.yaml
+  /api/projects/{project}/repository/file:
+    $ref: ./paths/file.yaml
+  /api/projects/{project}/repository/diff:
+    $ref: ./paths/diff.yaml
+  /api/projects/{project}/repository/review:
+    $ref: ./paths/review.yaml
+  /api/reader-pages:
+    $ref: ./paths/reader-pages.yaml
+  /api/notifications:
+    $ref: ./paths/notifications.yaml
+  /api/notifications/read:
+    $ref: ./paths/notifications-read.yaml
+components:
+  securitySchemes:
+    consoleSession:
+      type: apiKey
+      in: cookie
+      name: docsai_demo
+      description: |
+        Session cookie of the local demo console, set by `POST /api/session`. A production console
+        authenticates through the identity provider (IAM) configured by your operator instead.
+    serviceToken:
+      type: http
+      scheme: bearer
+      description: |
+        A token of a service principal, for consoles whose IAM integration accepts bearer tokens.
+        Your operator tells you whether yours does and issues the token. The Local mock accepts any value.

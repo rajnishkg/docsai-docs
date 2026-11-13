@@ -1,0 +1,38 @@
+get:
+  operationId: listReaderPages
+  tags: [Reader]
+  summary: Find reader pages that show an API
+  description: Lists the published reader pages, across the tenant's projects, that embed a given Schema Studio API version.
+  parameters:
+    - name: apiId
+      in: query
+      required: true
+      description: Schema Studio API id.
+      schema: {type: string, format: uuid}
+    - name: version
+      in: query
+      required: true
+      description: API version.
+      schema: {type: string, maxLength: 60}
+  responses:
+    '200':
+      description: Reader pages.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              pages:
+                type: array
+                items: {$ref: ../components/schemas.yaml#/ReaderPage}
+          example:
+            pages:
+              - project: 3f1c2b9e-7d4a-4c1e-9a55-0b8d2e6f4a10
+                projectName: DocsAI docs
+                url: 'http://acme.docs.localhost:4174/docsai-docs/docs/docsai/v1/console-api/'
+    '400':
+      description: Missing or malformed API id or version.
+      content:
+        application/json:
+          schema: {$ref: ../components/schemas.yaml#/Error}
+          example: {code: VALIDATION_FAILED, message: Choose an API and version.}

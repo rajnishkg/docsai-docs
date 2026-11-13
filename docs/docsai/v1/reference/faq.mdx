@@ -1,0 +1,69 @@
+# FAQ
+
+Short answers to the questions admins and authors ask most.
+
+<Accordions type="multiple">
+<Accordion title="Why is my change not on the reader site?">
+
+Committing saves to your branch; it never publishes. A page reaches readers after its exact commit is approved and published, and only when its catalog entry is `public` and `published`. See [Submit for review](/docs/docsai/v1/submit-for-review/).
+
+</Accordion>
+<Accordion title="Why does my approval no longer apply?">
+
+An approval belongs to one commit. Any later commit on the branch, including a merge from **Update from published base**, needs a new review.
+
+</Accordion>
+<Accordion title="Can readers see drafts or private pages?">
+
+No. Drafts, pages in review, archived pages and `protected` pages and APIs are never part of a release. The reader site has no login, so there is no private section on it. See [Keep an API private](/docs/docsai/v1/private-apis/).
+
+</Accordion>
+<Accordion title="Will moving a page break its link?">
+
+No. The address comes from the slug, not the folder or section. Move the file, update `file` in `catalog.json`, and the address stays the same.
+
+</Accordion>
+<Accordion title="I edited a page on GitHub. How does it reach the site?">
+
+An admin chooses **Sync source**, then the default branch is submitted, approved and published. See [Sync changes from GitHub](/docs/docsai/v1/sync-changes-from-github/).
+
+</Accordion>
+<Accordion title="Why does a page open in Markdown source instead of the visual editor?">
+
+The visual editor opens a page only when it can write it back unchanged. Raw HTML, unknown components or expressions keep a page in Markdown source. See [Write in the visual editor](/docs/docsai/v1/visual-editor/).
+
+</Accordion>
+<Accordion title="Creating a project fails with QUOTA_EXCEEDED. What now?">
+
+The tenant reached a limit, usually storage. **Settings → Usage and limits** shows the usage. Only your platform operator can raise a limit.
+
+</Accordion>
+<Accordion title="Which GitHub token permissions does DocsAI need?">
+
+The token must read and clone the repositories, push branches and open pull requests.
+
+<Tabs groupId="token">
+
+<TabItem value="fine-grained" label="Fine-grained token">
+
+**Contents** and **Pull requests**, both read and write, on the documentation repositories.
+
+</TabItem>
+
+<TabItem value="classic" label="Classic token">
+
+`repo` for private repositories, `public_repo` for public ones.
+
+</TabItem>
+
+</Tabs>
+
+</Accordion>
+</Accordions>
+
+## Next steps
+
+<Cards>
+<Card title="Introduction" href="/docs/docsai/v1/introduction/" description="Back to the start." />
+<Card title="Roles and permissions" href="/docs/docsai/v1/roles/" description="Who can do what." />
+</Cards>

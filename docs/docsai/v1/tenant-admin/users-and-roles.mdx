@@ -1,0 +1,64 @@
+# Manage users and roles
+
+People get access to DocsAI through teams. Each team holds a **tenant-wide role**, and a team can get a higher role on a single project through a **project grant**.
+
+You need the **owner** role in the tenant, or **owner** on the project for project grants.
+
+<Steps>
+
+<Step>
+
+## Review the teams
+
+Choose **Settings** and find **Teams**. The table lists each team with its tenant-wide role, its members (principal ids from your identity provider) and its provider team.
+
+![The Teams table in Settings with five teams and their roles](assets/docsai/v1/screenshots/users-and-roles/01-admin-teams.png)
+
+</Step>
+
+<Step>
+
+## Add or change a team
+
+Under **Add a team**, enter a **Team id** (lowercase, for example `writers`), a **Name**, the **Members (principal ids)** separated by commas, and a **Tenant-wide role**. Choose **Save team**. To change a team, choose **Edit** in its row; to remove it, choose **Delete**.
+
+**Provider team** (`org/team` on GitHub) is optional. When it is set, DocsAI names that GitHub team in `CODEOWNERS` for the areas the team owns.
+
+![The Add a team form with Team id, Name, Members, Tenant-wide role and Provider team](assets/docsai/v1/screenshots/users-and-roles/02-admin-add-team.png)
+
+</Step>
+
+<Step>
+
+## Grant a role on one project
+
+Choose the project in **Project** at the top, then find **Project access** in **Settings**. Each team shows its tenant-wide role and a **Project grant** list. Choose a role to grant it on this project, or **No project grant** to remove the grant. A team's role on the project is its tenant-wide role plus the grant.
+
+</Step>
+
+</Steps>
+
+## Roles
+
+| Role | Can |
+|---|---|
+| viewer | read and search published content |
+| contributor | open the project, start branches, write, commit and submit for review |
+| reviewer | open the project, approve or request changes (but not write) |
+| publisher | write, review and publish approved commits |
+| owner | everything a publisher can, and manage teams, grants, areas and settings |
+
+See [Roles and permissions](/docs/docsai/v1/roles/) for the full list.
+
+<Callout type="info" title="Personas are not permissions">
+
+**Change preferences** sets your persona and languages. It changes what the console emphasizes, never what you are allowed to do.
+
+</Callout>
+
+## Next steps
+
+<Cards>
+<Card title="Assign ownership areas" href="/docs/docsai/v1/ownership-areas/" description="Make a team the owner of a folder." />
+<Card title="Roles and permissions" href="/docs/docsai/v1/roles/" description="Every permission, role by role." />
+</Cards>

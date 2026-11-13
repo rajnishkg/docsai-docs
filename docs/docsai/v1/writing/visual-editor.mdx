@@ -1,0 +1,70 @@
+# Write in the visual editor
+
+The visual editor lets you write a page as formatted text, without Markdown. In **Writing mode**, choose **Plain language**. What you write is saved as Markdown, so a reviewer sees an ordinary diff.
+
+## Format text
+
+The **Formatting** toolbar has **Heading**, **Subheading**, **Bold**, **Italic**, **Code**, **Link**, **Bulleted list**, **Numbered list**, **Checklist**, **Quote**, **Code block**, **Table**, **Undo** and **Redo**.
+
+## Insert components
+
+The **Blocks** toolbar inserts the components readers see. Put the cursor where the block should go, then choose the block. When the cursor is inside a block, the toolbar shows that block's fields.
+
+<Steps>
+
+<Step>
+
+## Callout
+
+Choose **Callout**. Pick the **Callout type** (Note, Warning, Danger or Tip), type an optional **Title**, and write the text inside the box. **Remove callout** turns it back into plain paragraphs.
+
+</Step>
+
+<Step>
+
+## Steps
+
+Choose **Steps**. Each step has a heading and text. With the cursor in a step, choose **Add step** to add the next one or **Remove step** to delete it.
+
+</Step>
+
+<Step>
+
+## Tabs
+
+Choose **Tabs**. With the cursor in a tab, change its **Tab label**, and choose **Add tab** or **Remove tab**.
+
+</Step>
+
+<Step>
+
+## Cards
+
+Choose **Cards**. Click a card to select it, then fill in **Card title**, **Link** and **Description**. A link is a site route such as `/docs/docsai/v1/create-a-page/` or an `https` URL; the editor warns *Use a site route such as /docs/product/version/page/ or an https URL.* otherwise. **Add card** adds the next card.
+
+</Step>
+
+<Step>
+
+## Accordions
+
+Choose **Accordions**. With the cursor in a question, type the **Question** and the answer below it, and choose **Add accordion** for the next one. **Open** decides whether readers open **One at a time** or **Several at once**.
+
+</Step>
+
+</Steps>
+
+## When a page opens in Markdown source
+
+The visual editor opens a page only when it can write it back unchanged. A page with raw HTML, an unknown component or an expression stays in **Markdown source**. When a block is written in another spelling that means the same, **Convert for visual editing** rewrites it in the canonical form.
+
+## Save your work
+
+Type a **Commit message** and choose **Commit source changes**. Committing saves to your branch; it does not publish. See [Submit for review](/docs/docsai/v1/submit-for-review/).
+
+## Next steps
+
+<Cards>
+<Card title="Edit Markdown source" href="/docs/docsai/v1/markdown-source/" description="Edit the exact text and insert snippets." />
+<Card title="Submit for review" href="/docs/docsai/v1/submit-for-review/" description="Commit and submit the exact commit." />
+</Cards>

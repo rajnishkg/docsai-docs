@@ -1,0 +1,78 @@
+# Declare test servers
+
+Readers can send requests from the reader site only to a **mock** or a **sandbox** server. Production and staging servers in the definition stay documentation: the playground never sends to them.
+
+## Declare the server
+
+List the servers in the API's `environments` in `catalog.json`. Each has an `id`, a `label`, a `kind` (`mock` or `sandbox`), a `baseUrl` and `enabled`.
+
+```json title="catalog.json"
+"environments": [
+  {"id": "mock", "label": "Local mock", "kind": "mock", "baseUrl": "http://127.0.0.1:4020", "enabled": true}
+]
+```
+
+Rules:
+
+- The URL must be HTTPS. Plain HTTP is allowed only for a `mock` on loopback (`127.0.0.1`, `localhost` or `[::1]`).
+- No user name, password, query or fragment in the URL.
+- Never put credentials in `catalog.json` or `playground/environments.yaml`. Validation rejects them.
+
+`playground/environments.yaml` declares servers for every API of the repository; an API's own `environments` take precedence.
+
+## Run a local mock
+
+The mock behind this site is [Prism](https://stoplight.io/open-source/prism), started from the same definition. It answers each request with the definition's examples and allows browser requests from the reader site (CORS).
+
+<Tabs groupId="shell" persist="true">
+
+<TabItem value="bash" label="Bash">
+
+```bash
+npx @stoplight/prism-cli mock apis/docsai/console-api/v1/openapi.yaml --host 127.0.0.1 --port 4020
+```
+
+</TabItem>
+
+<TabItem value="powershell" label="PowerShell">
+
+```powershell
+npx @stoplight/prism-cli mock apis/docsai/console-api/v1/openapi.yaml --host 127.0.0.1 --port 4020
+```
+
+</TabItem>
+
+</Tabs>
+
+Prism prints each route it serves, then that it is listening:
+
+```text title="Output"
+[CLI] i  info      GET        http://127.0.0.1:4020/api/session
+[CLI] i  info      POST       http://127.0.0.1:4020/api/session
+[CLI] i  info      GET        http://127.0.0.1:4020/api/projects
+…
+[CLI] i  info      POST       http://127.0.0.1:4020/api/notifications/read
+[CLI] ►  start     Prism is listening on http://127.0.0.1:4020
+```
+
+Check it from a second terminal. Without credentials an operation that needs them answers `401`; with a bearer token it answers with the example:
+
+```bash title="Terminal"
+curl -i http://127.0.0.1:4020/api/projects
+# HTTP/1.1 401 Unauthorized
+curl -H "Authorization: Bearer sandbox-token" http://127.0.0.1:4020/api/projects
+# [{"id":"3f1c2b9e-7d4a-4c1e-9a55-0b8d2e6f4a10","kind":"repository","name":"DocsAI docs", …}]
+```
+
+<Callout type="warning" title="A loopback mock works only on your computer">
+
+`http://127.0.0.1:4020` is the reader's own computer. For readers elsewhere, host the mock or a sandbox on an HTTPS address and declare that URL instead.
+
+</Callout>
+
+## Next steps
+
+<Cards>
+<Card title="Send a test request" href="/docs/docsai/v1/test-request/" description="Open an operation in the playground." />
+<Card title="Use the API playground" href="/docs/docsai/v1/api-playground/" description="Choose the server, add credentials and send." />
+</Cards>

@@ -1,0 +1,44 @@
+# Sync changes from GitHub
+
+The console works on its own copy of the repository. When someone commits to the default branch on GitHub, by merging a pull request or editing a file there, bring that commit into the console with **Sync source**, then into your branch with **Update from published base**.
+
+<Steps>
+
+<Step>
+
+## Sync the source
+
+Sign in with the **publish** permission, choose **Content** and the project, and keep **Working branch** on the default branch. In the **GitHub Enterprise workflow** box, choose **Sync source**.
+
+DocsAI fetches the default branch from GitHub and moves the console's source forward. The console answers *Source synchronized. Existing author branches were retained. Use Update from published base on a branch to bring in the synchronized changes and resolve any conflicts.*
+
+</Step>
+
+<Step>
+
+## Update your branch
+
+Authors then select their branch in **Working branch** and choose **Update from published base**. DocsAI merges the synchronized commit into the branch and answers *Branch updated from the published base*, or that the branch *already contains the published base*. When both sides changed the same lines, the console lists the files to resolve; see [Resolve conflicts](/docs/docsai/v1/resolve-conflicts/).
+
+</Step>
+
+<Step>
+
+## Publish the synchronized commit
+
+A sync does not change what readers see. To publish the GitHub commit, submit, approve and publish the default branch like any other change. See [Publish the reader site](/docs/docsai/v1/publish-the-reader-site/).
+
+</Step>
+
+</Steps>
+
+## When sync is refused
+
+Sync only moves forward. It refuses when the console's source and GitHub have diverged, when GitHub's default branch went back in history, or when GitHub is behind a commit the console already published. Fix the history on GitHub (merge rather than force-push), then sync again.
+
+## Next steps
+
+<Cards>
+<Card title="Work with pull requests" href="/docs/docsai/v1/pull-requests/" description="Push a console branch and open a pull request." />
+<Card title="Edit on GitHub" href="/docs/docsai/v1/edit-on-github/" description="Change a page in the GitHub web editor." />
+</Cards>

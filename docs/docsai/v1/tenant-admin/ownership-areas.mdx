@@ -1,0 +1,60 @@
+# Assign ownership areas
+
+An area makes a team the owner of a folder. Only the team's members, or project owners, can commit inside it, and a reviewer from that team approves changes to it. DocsAI writes the areas to `catalog.json` and keeps a matching block in `.github/CODEOWNERS`, so GitHub asks the same team to review pull requests.
+
+You need the **owner** role on the project.
+
+<Steps>
+
+<Step>
+
+## Open Area ownership
+
+Choose the project in **Project**, open **Settings** and scroll to **Area ownership**. **Branch** names the branch the change is committed to; the line below it shows the branch head.
+
+</Step>
+
+<Step>
+
+## Add an area
+
+Choose **Add area**. Enter the **Path prefix**, a folder ending in `/`, and choose the **Owning team**. In this repository the API team owns the private sample API:
+
+| Path prefix | Owning team |
+|---|---|
+| `apis/docsai/billing-sample/` | API team (`api`) |
+
+</Step>
+
+<Step>
+
+## Save
+
+Choose **Save areas and CODEOWNERS**. DocsAI commits `catalog.json` and `.github/CODEOWNERS` to the branch. Like any commit, it reaches readers only after review and publish.
+
+</Step>
+
+</Steps>
+
+The result in `catalog.json`:
+
+```json title="catalog.json"
+"areas": [
+  {"path": "apis/docsai/billing-sample/", "team": "api"}
+]
+```
+
+DocsAI replaces only the lines between `# BEGIN DocsAI areas` and `# END DocsAI areas` in `.github/CODEOWNERS`. Add your own rules outside that block. A team is named in `CODEOWNERS` only when it has a **Provider team** (`org/team`) in **Settings → Teams**.
+
+<Callout type="warning" title="Areas restrict who can commit">
+
+After you save an area, authors outside the owning team can no longer commit inside it, and changes inside it need a reviewer from that team. Give each area a team whose members will maintain and review it. Files outside every area need only the draft permission.
+
+</Callout>
+
+## Next steps
+
+<Cards>
+<Card title="Publish the reader site" href="/docs/docsai/v1/publish-the-reader-site/" description="Publish the approved commit." />
+<Card title="Manage users and roles" href="/docs/docsai/v1/users-and-roles/" description="Teams, roles and project grants." />
+</Cards>

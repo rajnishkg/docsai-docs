@@ -1,0 +1,28 @@
+get:
+  operationId: listNotifications
+  tags: [Notifications]
+  summary: Read your notifications
+  description: Returns your newest notifications, as shown under the bell in the console header.
+  parameters:
+    - name: limit
+      in: query
+      required: false
+      description: How many items to return.
+      schema: {type: integer, minimum: 1, maximum: 200}
+  responses:
+    '200':
+      description: Inbox.
+      content:
+        application/json:
+          schema: {$ref: ../components/schemas.yaml#/Inbox}
+          example:
+            unread: 2
+            items:
+              - {id: 17, at: '2026-11-13T21:39:59.289Z', read: false, type: publish.completed, actor: synthetic-admin, title: main, project: 3f1c2b9e-7d4a-4c1e-9a55-0b8d2e6f4a10, projectName: DocsAI docs}
+              - {id: 16, at: '2026-11-13T21:38:34.844Z', read: false, type: review.decided, actor: synthetic-reviewer, title: main, project: 3f1c2b9e-7d4a-4c1e-9a55-0b8d2e6f4a10, projectName: DocsAI docs}
+    '400':
+      description: Limit out of range.
+      content:
+        application/json:
+          schema: {$ref: ../components/schemas.yaml#/Error}
+          example: {code: VALIDATION_FAILED, message: Choose a limit from 1 to 200.}

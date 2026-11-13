@@ -1,0 +1,41 @@
+# Roles and permissions
+
+A person's permissions come from their teams. Each team has a tenant-wide role, and a project grant can raise it on one project. **Settings** shows your own: *Identity: … · Permissions: …*.
+
+## Roles
+
+| Permission | viewer | contributor | reviewer | publisher | owner |
+|---|---|---|---|---|---|
+| Read and search published content (`read`, `search`) | yes | | | | |
+| Open the project in the console (`workspace`) | | yes | yes | yes | yes |
+| Start branches, create pages, commit, submit (`draft`) | | yes | | yes | yes |
+| Approve or request changes (`review`) | | | yes | yes | yes |
+| Publish an approved commit (`publish`) | | | | yes | yes |
+| Read reader feedback and statistics (`read-insights`) | | yes | yes | yes | yes |
+| Run playground suites (`playground-run`) | | yes | | yes | yes |
+| Teams, grants, areas and site settings (`manage-access`) | | | | | yes |
+
+The reviewer role reviews but does not write. Viewers never get `read-insights`, because reader comments can hold personal data.
+
+## In the local demo console
+
+| Identity | Team | Role |
+|---|---|---|
+| author | Writers (`writers`) | contributor |
+| reviewer | Reviewers (`reviewers`) | reviewer |
+| admin | Administrators (`admins`) | owner |
+| reader | Readers (`readers`) | viewer |
+| api-author | API team (`api`) | contributor |
+
+## Rules that apply to every role
+
+- An approval belongs to one exact commit.
+- Inside an ownership area, only the owning team's members (or project owners) can commit, and a reviewer who is a member of that team, or a project owner, approves.
+- Your persona and languages, set with **Change preferences**, never change your permissions.
+
+## Next steps
+
+<Cards>
+<Card title="Manage users and roles" href="/docs/docsai/v1/users-and-roles/" description="Teams and project grants." />
+<Card title="Assign ownership areas" href="/docs/docsai/v1/ownership-areas/" description="Folder ownership." />
+</Cards>

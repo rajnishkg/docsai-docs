@@ -1,0 +1,47 @@
+# Use the API playground
+
+The API playground sends real HTTP requests from your browser to the API's test server and shows the response. It runs entirely in your browser: DocsAI never sees your credentials.
+
+<Steps>
+
+<Step>
+
+## Choose the server
+
+**API environment** lists the API's enabled mock and sandbox servers. Choose one, for example **Local mock**. Requests go only to the chosen server.
+
+</Step>
+
+<Step>
+
+## Add credentials
+
+Operations that need authentication show **Authentication · IAM credentials**. Enter the value for the scheme the operation uses, for example a token for `serviceToken` (*Token only; omit the Bearer prefix*). Credentials are *Stored only in this browser. Use sandbox keys, never production secrets.* Choose **Forget saved credentials** to remove them.
+
+For a mock server, **Load mock credentials** fills placeholder values the mock accepts.
+
+</Step>
+
+<Step>
+
+## Send and read the response
+
+Fill in path and query parameters and the request body, then choose **Send**. The playground shows the status, headers and body of the response.
+
+</Step>
+
+</Steps>
+
+## Limits
+
+- The playground sends only to declared test servers. Any other destination is refused.
+- Credentials go only into the credential controls. A token typed into a header or query parameter is refused.
+- A cookie-based scheme cannot be sent from the browser, so operations that accept only a cookie session cannot be tried here.
+- The server must allow the reader site's origin through CORS. Otherwise the playground reports *Check that the API service is running and allows this documentation origin through CORS.*
+
+## Next steps
+
+<Cards>
+<Card title="Keep an API private" href="/docs/docsai/v1/private-apis/" description="Internal APIs stay in the console." />
+<Card title="Declare test servers" href="/docs/docsai/v1/test-servers/" description="Mock and sandbox rules." />
+</Cards>

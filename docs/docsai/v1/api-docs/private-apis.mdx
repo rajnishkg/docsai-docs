@@ -1,0 +1,66 @@
+# Keep an API private
+
+The reader site has no login. Anything in a release is public, so a private API is never published there. Private APIs stay in the console, where signed-in people read and test them in **Schema Studio**.
+
+This repository holds a sample: the **Billing sample API** in `apis/docsai/billing-sample/v1/`.
+
+## Mark the API protected
+
+In `catalog.json`, set the API's classification to `protected`:
+
+```json title="catalog.json"
+{"id": "billing-sample", "title": "Billing sample API (private)", "classification": "protected", "lifecycle": "published"}
+```
+
+Releases leave out protected APIs, their guides and their assets. The reader site does not list the API and its address returns *not found*.
+
+## Read and test it in the console
+
+<Steps>
+
+<Step>
+
+## Open Schema Studio
+
+Sign in to the console and choose **Schema Studio**. Open the API from the inventory, or add it with **Create or import definition**.
+
+</Step>
+
+<Step>
+
+## Keep Reader visibility Private
+
+Each API version has **Reader visibility**. **Private** is the default: *Private versions are visible only to signed-in authors and reviewers in this console.* Leave it Private.
+
+</Step>
+
+<Step>
+
+## Read the reference
+
+Open the **Reference** view. It is the same API reference readers would see, shown only inside the console.
+
+</Step>
+
+<Step>
+
+## Try a request
+
+Open the **Test** view to send requests to the API's mock or sandbox servers, with the same playground as the reader site.
+
+</Step>
+
+</Steps>
+
+<Callout type="warning" title="Private is not secret">
+
+Private keeps the API off the public site. It does not encrypt the files: everyone with access to the GitHub repository can read them. Never store real credentials or customer data in an API definition or its examples.
+
+</Callout>
+
+## Next steps
+
+<Cards>
+<Card title="Publish an OpenAPI definition" href="/docs/docsai/v1/publish-an-openapi-definition/" description="Publish a public API reference." />
+<Card title="Roles and permissions" href="/docs/docsai/v1/roles/" description="Who can open Schema Studio." />
+</Cards>

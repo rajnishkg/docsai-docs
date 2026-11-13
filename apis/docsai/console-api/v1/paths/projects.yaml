@@ -1,0 +1,30 @@
+get:
+  operationId: listProjects
+  tags: [Projects]
+  summary: List projects
+  description: Lists the documentation projects of your tenant that you can open.
+  responses:
+    '200':
+      description: Projects of the tenant.
+      content:
+        application/json:
+          schema:
+            type: array
+            items: {$ref: ../components/schemas.yaml#/Project}
+          example:
+            - id: 3f1c2b9e-7d4a-4c1e-9a55-0b8d2e6f4a10
+              kind: repository
+              name: DocsAI docs
+              branch: main
+              head: 9a1f0c3d5e7b2a4c6e8f0a1b3c5d7e9f1a2b3c4d
+              sourceBase: 9a1f0c3d5e7b2a4c6e8f0a1b3c5d7e9f1a2b3c4d
+              product: docsai
+              version: v1
+              siteSlug: docsai-docs
+              createdAt: '2026-11-13T09:30:00.000Z'
+    '403':
+      description: Not signed in.
+      content:
+        application/json:
+          schema: {$ref: ../components/schemas.yaml#/Error}
+          example: {code: ACCESS_DENIED, message: 'Choose an explicitly synthetic local demo identity, or connect production IAM.'}

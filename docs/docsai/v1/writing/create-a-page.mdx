@@ -1,0 +1,54 @@
+# Create a page
+
+Every change starts on a branch. **New page** then writes the Markdown file and its `catalog.json` entry together, in one commit on that branch.
+
+You need the **contributor** role on the project.
+
+<Steps>
+
+<Step>
+
+## Start a branch
+
+Choose **Content** and the project. In **Start editing topic**, type a short topic in lowercase words joined by hyphens, for example `components-page`, and choose **Start editing**. The console creates `work/<you>/<topic>` from the published base and selects it in **Working branch**.
+
+</Step>
+
+<Step>
+
+## Open New page
+
+Under **New Markdown page**, choose **New page** and fill in the form:
+
+| Field | What to enter |
+|---|---|
+| Page title | A title that starts with a verb for tasks, for example *Use reader components*. |
+| Slug | The page address and file name, for example `components`. Unique in the version. |
+| Product, Version | Where the page belongs, for example `docsai` and `v1`. |
+| Page type (optional) | A template. Choosing one fills **Initial Markdown** with the template's headings and suggests a section and folder. |
+| Reader section | The sidebar group readers see the page in. |
+| Folder (optional) | The folder of the file, for example `writing`. The line below shows the path, such as `Creates docs/docsai/v1/writing/components.md`. |
+| Initial Markdown | The first text of the page. You can also leave the template text and write later. |
+
+Open **Page settings** in the form to set the description, owner, review date and lifecycle now. The lifecycle starts as **Draft**; readers never see a draft. Choose **Published** when the page is meant for readers once it is approved.
+
+</Step>
+
+<Step>
+
+## Create the page
+
+Choose **Create page**. The console commits the file and the catalog entry to your branch and opens the page in the editor.
+
+</Step>
+
+</Steps>
+
+The address of a page is always `docs/<product>/<version>/<slug>/`. Folders and sections never appear in it, so you can move a page later without breaking links.
+
+## Next steps
+
+<Cards>
+<Card title="Write in the visual editor" href="/docs/docsai/v1/visual-editor/" description="Write without Markdown and insert components." />
+<Card title="Change page settings" href="/docs/docsai/v1/page-settings/" description="Description, section, page type and order." />
+</Cards>

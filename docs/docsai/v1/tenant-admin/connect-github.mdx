@@ -1,0 +1,74 @@
+# Connect GitHub
+
+DocsAI reaches GitHub through a provider connection of your tenant. Check that the connection exists and verify it before you create or import a repository.
+
+You need the **owner** role in the tenant. The token itself is never entered in the browser: your platform operator stores it on the server, and the connection only names it.
+
+<Steps>
+
+<Step>
+
+## Sign in as a tenant admin
+
+Open the console and sign in. On the local demo console, choose **admin · acme (synthetic)** in **Active identity**. The workspace navigation appears on the left.
+
+![Active identity set to admin in the console header](assets/docsai/v1/screenshots/connect-github/01-admin-choose-identity.png)
+
+</Step>
+
+<Step>
+
+## Find the provider connection
+
+Choose **Settings** and scroll to **Provider connections**. Each connection shows its label, id, kind, host and secret reference, for example `GitHub github · github · https://github.com/ · env:DOCSAI_SECRET_ACME_GITHUB · configured`.
+
+If there is no GitHub connection, add one: enter a **Connection id** and **Label**, choose **Kind** GitHub, keep **Host** `https://github.com/`, enter the **Secret reference** your operator gave you, and choose **Save connection**.
+
+![Provider connections in Settings, with the GitHub connection configured](assets/docsai/v1/screenshots/connect-github/02-admin-provider-connections.png)
+
+</Step>
+
+<Step>
+
+## Open Connect repository
+
+Choose **Repositories**, then **Connect repository**. The panel **Connect enterprise repository** shows the provider and the result of its last check.
+
+![Connect enterprise repository panel with the Verify provider button](assets/docsai/v1/screenshots/connect-github/03-admin-connect-repository.png)
+
+</Step>
+
+<Step>
+
+## Verify the provider
+
+Choose **Verify provider**. When the token works, the panel shows **Verified at last check** and the time of the check.
+
+![Verified at last check after choosing Verify provider](assets/docsai/v1/screenshots/connect-github/04-admin-verify-provider.png)
+
+</Step>
+
+</Steps>
+
+<Callout type="warning" title="Verify again after a token change">
+
+The check is a record of the last attempt, not a live status. After your operator rotates the token, choose **Verify provider** again.
+
+</Callout>
+
+## If verification fails
+
+| Message | What to do |
+|---|---|
+| Setup required | The operator has not set the token on the server. Ask them to set it and restart the console. |
+| Provider request failed. Check network and trusted TLS configuration. | A proxy or certificate blocks GitHub. The operator starts the console with Node's `--use-system-ca` flag or adds the CA. |
+| PROVIDER_AUTH_REQUIRED | The token is expired or wrong. Ask the operator for a new one. |
+
+The token needs to read and clone your repositories, push branches and open pull requests: for a fine-grained token, **Contents** and **Pull requests** with read and write access.
+
+## Next steps
+
+<Cards>
+<Card title="Create a documentation repository" href="/docs/docsai/v1/create-documentation-repository/" description="Create the GitHub repository and its project." />
+<Card title="Import a repository" href="/docs/docsai/v1/import-a-repository/" description="Open a repository that already has a catalog." />
+</Cards>
