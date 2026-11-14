@@ -1,8 +1,8 @@
 # Edit locally with VS Code
 
-Clone the repository, edit pages in VS Code or any editor, and push a branch. Use this for large changes, many files, or screenshots.
+Clone the repository, edit pages in VS Code or any editor, and push a branch. Use this for large changes, many files, or screenshots. The screenshots of this site were added exactly this way; the commands and their output below are from that change.
 
-You need Git, an editor, and write access to the repository on GitHub.
+You need Git, an editor, write access to the repository on GitHub and, for the last step, the GitHub CLI (`gh`).
 
 <Steps>
 
@@ -13,6 +13,10 @@ You need Git, an editor, and write access to the repository on GitHub.
 ```bash title="Terminal"
 git clone https://github.com/rajnishkg/docsai-docs.git
 cd docsai-docs
+```
+
+```text title="Output"
+Cloning into 'docsai-docs'...
 ```
 
 </Step>
@@ -27,13 +31,23 @@ Name the branch `work/<you>/<topic>`, the same pattern the console uses.
 git switch -c work/docs/screenshots
 ```
 
+```text title="Output"
+Switched to a new branch 'work/docs/screenshots'
+```
+
 </Step>
 
 <Step>
 
 ## Edit in VS Code
 
-Open the folder with `code .`. Pages are under `docs/docsai/v1/`, screenshots under `assets/docsai/v1/screenshots/<page-slug>/`. When you add a page or an image, add it to `catalog.json` too: a page under `documents`, an image under `assets` and in the page's own `assets` list.
+Open the folder with `code .`. Pages are under `docs/docsai/v1/<section>/`, screenshots under `assets/docsai/v1/screenshots/<page-slug>/`. Put each screenshot right after the step it shows:
+
+```md title="docs/docsai/v1/tenant-admin/connect-github.mdx"
+![Verified at last check after choosing Verify provider](assets/docsai/v1/screenshots/connect-github/04-admin-verify-provider.png)
+```
+
+When you add a page or an image, add it to `catalog.json` too: a page under `documents`, an image under `assets` **and** in the page's own `assets` list. A missing entry fails validation with *Image must name an explicitly declared public asset.*
 
 </Step>
 
@@ -43,8 +57,18 @@ Open the folder with `code .`. Pages are under `docs/docsai/v1/`, screenshots un
 
 ```bash title="Terminal"
 git add -A
-git commit -m "docs(writing): add screenshots to the writing pages"
+git commit -m "docs(writing): add screenshots in click order to every task page"
 git push -u origin work/docs/screenshots
+```
+
+```text title="Output"
+[work/docs/screenshots 946f76d] docs(writing): add screenshots in click order to every task page
+ 115 files changed, 1079 insertions(+), 924 deletions(-)
+remote: Create a pull request for 'work/docs/screenshots' on GitHub by visiting:
+remote:      https://github.com/rajnishkg/docsai-docs/pull/new/work/docs/screenshots
+To https://github.com/rajnishkg/docsai-docs.git
+ * [new branch]      work/docs/screenshots -> work/docs/screenshots
+branch 'work/docs/screenshots' set up to track 'origin/work/docs/screenshots'.
 ```
 
 </Step>
@@ -53,17 +77,23 @@ git push -u origin work/docs/screenshots
 
 ## Open a pull request
 
-Open the link Git prints, or use the GitHub CLI:
+Open the link Git printed, or use the GitHub CLI:
 
 ```bash title="Terminal"
-gh pr create --base main --head work/docs/screenshots --title "docs(writing): add screenshots" --body "Screenshots for the writing pages."
+gh pr create --base main --head work/docs/screenshots --title "docs(writing): add screenshots in click order" --body "Screenshots for every task page."
 ```
 
-After the pull request is merged, an admin chooses **Sync source** in the console, and the change goes through review and publish.
+GitHub CLI prints the address of the new pull request. After it is merged, an admin chooses **Sync source** in the console, and the change goes through review and publish like any other. See [Work with pull requests](/docs/docsai/v1/pull-requests/).
 
 </Step>
 
 </Steps>
+
+<Callout type="info" title="Editing in the browser instead">
+
+vscode.dev and github.dev open the same repository in the browser after you sign in to GitHub. The steps are the same: a branch, a commit, a pull request.
+
+</Callout>
 
 ## Next steps
 

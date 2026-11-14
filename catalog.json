@@ -517,7 +517,9 @@
       "reviewDate": "2027-11-13",
       "redirects": [],
       "related": [],
-      "assets": []
+      "assets": [
+        "assets/docsai/v1/screenshots/connect-github/04-admin-verify-provider.png"
+      ]
     },
     {
       "id": "pull-requests",
