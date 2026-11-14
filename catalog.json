@@ -1,6 +1,11 @@
 {
   "schemaVersion": 2,
-  "areas": [],
+  "areas": [
+    {
+      "path": "apis/docsai/billing-sample/",
+      "team": "api"
+    }
+  ],
   "products": [
     {
       "id": "docsai",
@@ -611,7 +616,8 @@
       "redirects": [],
       "related": [],
       "assets": []
-    }
+    },
+    {"id":"components","product":"docsai","version":"v1","slug":"components","file":"docs/docsai/v1/writing/components.md","title":"Use reader components","kind":"markdown","owner":"documentation-team","classification":"public","lifecycle":"published","reviewDate":"2027-11-13","section":"writing","redirects":[],"related":[],"assets":[],"order":50,"description":"The components readers see: callouts, steps, tabs, cards, accordions and titled code blocks."}
   ],
   "assets": [
     {

@@ -1,3 +1,5 @@
+# DocsAI console API, one file. The reader renders operations from this entry file only, so paths
+# and schemas are kept here rather than in separate $ref files.
 openapi: 3.1.0
 info:
   title: DocsAI console API
@@ -38,25 +40,747 @@ security:
   - serviceToken: []
 paths:
   /api/session:
-    $ref: ./paths/session.yaml
+    get:
+      operationId: getSession
+      tags:
+        - Session
+      summary: Get the current session
+      description: Returns the signed-in person, their tenant and the permissions they hold, evaluated on a project when you
+        pass one. It answers without a session too, with `principal` null.
+      security: []
+      parameters:
+        - name: project
+          in: query
+          required: false
+          description: Project id to evaluate capabilities on.
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: The session. `principal` is null when nobody is signed in.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Session"
+              example:
+                principal:
+                  id: synthetic-author
+                  tenant: acme
+                  name: author
+                platformAdmin: false
+                tenant:
+                  id: acme
+                  name: Acme Corporation
+                  readerOrigin: http://acme.docs.localhost:4174
+                capabilities:
+                  - draft
+                  - workspace
+                  - read-insights
+                needsTeam: false
+                demo: true
+    post:
+      operationId: startDemoSession
+      tags:
+        - Session
+      summary: Sign in with a synthetic identity (local demo only)
+      description: Starts a session for one of the fixed synthetic identities of the local demo console and sets the
+        `docsai_demo` cookie. A production console answers `403 IAM_NOT_CONNECTED`.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - identity
+              properties:
+                identity:
+                  type: string
+                  enum:
+                    - author
+                    - reviewer
+                    - admin
+                    - reader
+                    - api-author
+            example:
+              identity: author
+      responses:
+        "200":
+          description: Signed in. The response sets the session cookie.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  principal:
+                    type: object
+                    required:
+                      - id
+                      - tenant
+                    properties:
+                      id:
+                        type: string
+                        description: Principal id from the identity provider.
+                        examples:
+                          - synthetic-author
+                      tenant:
+                        type: string
+                        description: Tenant id.
+                        examples:
+                          - acme
+                      name:
+                        type: string
+                        description: Display name.
+                        examples:
+                          - author
+                  demo:
+                    type: boolean
+              example:
+                principal:
+                  id: synthetic-author
+                  tenant: acme
+                  name: author
+                demo: true
+        "400":
+          description: Unknown identity.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                code: INVALID_IDENTITY
+        "403":
+          description: Not a demo console, or the identity's tenant is not active.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                code: IAM_NOT_CONNECTED
   /api/projects:
-    $ref: ./paths/projects.yaml
+    get:
+      operationId: listProjects
+      tags:
+        - Projects
+      summary: List projects
+      description: Lists the documentation projects of your tenant that you can open.
+      responses:
+        "200":
+          description: Projects of the tenant.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - id
+                    - kind
+                    - name
+                  properties:
+                    id:
+                      type: string
+                      format: uuid
+                      examples:
+                        - 3f1c2b9e-7d4a-4c1e-9a55-0b8d2e6f4a10
+                    kind:
+                      type: string
+                      description: "`repository` for Git-backed projects."
+                      examples:
+                        - repository
+                    name:
+                      type: string
+                      examples:
+                        - DocsAI docs
+                    branch:
+                      type: string
+                      description: Default branch of the source repository.
+                      examples:
+                        - main
+                    head:
+                      type: string
+                      description: Commit at the head of the default branch.
+                      examples:
+                        - 9a1f0c3d5e7b2a4c6e8f0a1b3c5d7e9f1a2b3c4d
+                    sourceBase:
+                      type: string
+                      description: Published base commit that new branches start from.
+                    product:
+                      type: string
+                      examples:
+                        - docsai
+                    version:
+                      type: string
+                      examples:
+                        - v1
+                    siteSlug:
+                      type: string
+                      description: Path of the project site on the tenant reader.
+                      examples:
+                        - docsai-docs
+                    activeRelease:
+                      type: string
+                      description: Id of the release readers see now.
+                    createdAt:
+                      type: string
+                      format: date-time
+              example:
+                - id: 3f1c2b9e-7d4a-4c1e-9a55-0b8d2e6f4a10
+                  kind: repository
+                  name: DocsAI docs
+                  branch: main
+                  head: 9a1f0c3d5e7b2a4c6e8f0a1b3c5d7e9f1a2b3c4d
+                  sourceBase: 9a1f0c3d5e7b2a4c6e8f0a1b3c5d7e9f1a2b3c4d
+                  product: docsai
+                  version: v1
+                  siteSlug: docsai-docs
+                  createdAt: 2026-11-13T09:30:00.000Z
+        "403":
+          description: Not signed in.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                code: ACCESS_DENIED
+                message: Choose an explicitly synthetic local demo identity, or connect production IAM.
   /api/projects/{project}/repository/branches:
-    $ref: ./paths/branches.yaml
+    parameters:
+      - name: project
+        in: path
+        required: true
+        description: Project id.
+        schema:
+          type: string
+          format: uuid
+    get:
+      operationId: listBranches
+      tags:
+        - Repository
+      summary: List branches
+      description: Lists local branches and their provider copies, with who owns each personal branch.
+      responses:
+        "200":
+          description: Branches of the project repository.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BranchList"
+              example:
+                branches:
+                  - name: main
+                    head: 9a1f0c3d5e7b2a4c6e8f0a1b3c5d7e9f1a2b3c4d
+                    remote: false
+                    personal: false
+                    owner: null
+                    mine: false
+                    writable: true
+                  - name: work/author/components-page
+                    head: 4c6e8f0a1b3c5d7e9f1a2b3c4d9a1f0c3d5e7b2a
+                    remote: false
+                    personal: true
+                    owner: synthetic-author
+                    mine: true
+                    writable: true
+                defaultBranch: main
+                sourceBase: 9a1f0c3d5e7b2a4c6e8f0a1b3c5d7e9f1a2b3c4d
+                me:
+                  id: synthetic-author
+                  slug: author
+                  prefix: work/author/
+        "404":
+          description: Unknown project, or not visible to you.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                code: NOT_FOUND
+    post:
+      operationId: startEditing
+      tags:
+        - Repository
+      summary: Start a personal branch
+      description: Creates `work/<you>/<topic>` from the newest published base. This is what **Start editing** does in the console.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - topic
+              additionalProperties: false
+              properties:
+                topic:
+                  type: string
+                  description: Lowercase words joined by hyphens.
+                  examples:
+                    - components-page
+            example:
+              topic: components-page
+      responses:
+        "201":
+          description: Branch created.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StartedBranch"
+              example:
+                branch: work/author/components-page
+                head: 9a1f0c3d5e7b2a4c6e8f0a1b3c5d7e9f1a2b3c4d
+                base: 9a1f0c3d5e7b2a4c6e8f0a1b3c5d7e9f1a2b3c4d
+                owner: synthetic-author
+                personal: true
+        "409":
+          description: A branch with this topic already exists.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                code: CONFLICT
+                message: Branch work/author/components-page already exists. Choose another topic or open it.
   /api/projects/{project}/repository/tree:
-    $ref: ./paths/tree.yaml
+    parameters:
+      - name: project
+        in: path
+        required: true
+        description: Project id.
+        schema:
+          type: string
+          format: uuid
+    get:
+      operationId: getTree
+      tags:
+        - Repository
+      summary: List tracked files of a branch
+      description: Returns the files of a branch with the catalog view of its documents, areas and review state.
+      parameters:
+        - name: branch
+          in: query
+          required: true
+          description: Branch name, for example `main` or `work/author/components-page`.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Files and catalog summary.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tree"
+              example:
+                branch: main
+                head: 9a1f0c3d5e7b2a4c6e8f0a1b3c5d7e9f1a2b3c4d
+                areas:
+                  - path: docs/docsai/v1/api-docs/
+                    team: api
+                files:
+                  - path: catalog.json
+                    blob: 03e4114f94f065351fbc72f4ca24d6e093555185
+                    mode: "100644"
+                    editable: false
+                    area: null
+                  - path: docs/docsai/v1/writing/create-a-page.md
+                    blob: 361c9fa2c074548bb766cb14f6bf5b9a57a3488a
+                    mode: "100644"
+                    editable: true
+                    area: null
+                documents: []
+                review:
+                  status: draft
+                  commit: 9a1f0c3d5e7b2a4c6e8f0a1b3c5d7e9f1a2b3c4d
+        "404":
+          description: Unknown project or branch.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                code: NOT_FOUND
   /api/projects/{project}/repository/file:
-    $ref: ./paths/file.yaml
+    parameters:
+      - name: project
+        in: path
+        required: true
+        description: Project id.
+        schema:
+          type: string
+          format: uuid
+    get:
+      operationId: getFile
+      tags:
+        - Repository
+      summary: Read a file
+      description: Returns the text of one tracked file on a branch, with the blob id you need to save it.
+      parameters:
+        - name: branch
+          in: query
+          required: true
+          description: Branch name.
+          schema:
+            type: string
+        - name: path
+          in: query
+          required: true
+          description: Repository path of the file.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: File text.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FileContent"
+              example:
+                branch: main
+                head: 9a1f0c3d5e7b2a4c6e8f0a1b3c5d7e9f1a2b3c4d
+                path: docs/docsai/v1/writing/create-a-page.md
+                blob: 361c9fa2c074548bb766cb14f6bf5b9a57a3488a
+                body: |
+                  # Create a page
+
+                  Start a branch, then choose New page.
+                editable: true
+                byteLimit: 1048576
+        "404":
+          description: The file is not tracked on this branch.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                code: NOT_FOUND
+                message: Tracked file unavailable.
+    put:
+      operationId: saveFile
+      tags:
+        - Repository
+      summary: Commit a file
+      description: Writes the full text of one file as a commit on your branch. The text is validated like a release before
+        the commit lands.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SaveFile"
+            example:
+              branch: work/author/components-page
+              path: docs/docsai/v1/writing/create-a-page.md
+              body: |
+                # Create a page
+
+                Updated text.
+              message: "docs(writing): clarify the New page form"
+              expectedHead: 9a1f0c3d5e7b2a4c6e8f0a1b3c5d7e9f1a2b3c4d
+              expectedBlob: 361c9fa2c074548bb766cb14f6bf5b9a57a3488a
+      responses:
+        "200":
+          description: Committed. `head` is the new commit.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FileContent"
+              example:
+                branch: work/author/components-page
+                head: 4c6e8f0a1b3c5d7e9f1a2b3c4d9a1f0c3d5e7b2a
+                path: docs/docsai/v1/writing/create-a-page.md
+                blob: 7b2a4c6e8f0a1b3c5d7e9f1a2b3c4d9a1f0c3d5e
+                body: |
+                  # Create a page
+
+                  Updated text.
+                editable: true
+                byteLimit: 1048576
+        "400":
+          description: The text failed validation.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                code: VALIDATION_FAILED
+                message: Describe this commit in a single line.
+        "409":
+          description: Someone changed the file after you loaded it.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                code: CONFLICT
+                message: Someone changed docs/docsai/v1/writing/create-a-page.md since you loaded it. Reload; your text is still in the
+                  editor.
+                paths:
+                  - docs/docsai/v1/writing/create-a-page.md
   /api/projects/{project}/repository/diff:
-    $ref: ./paths/diff.yaml
+    parameters:
+      - name: project
+        in: path
+        required: true
+        description: Project id.
+        schema:
+          type: string
+          format: uuid
+    get:
+      operationId: getDiff
+      tags:
+        - Repository
+      summary: Show what a branch changes
+      description: Returns the Git diff between the published base and the branch head. Reviewers read this diff before they
+        approve.
+      parameters:
+        - name: branch
+          in: query
+          required: true
+          description: Branch name.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Unified diff.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Diff"
+              example:
+                branch: work/author/components-page
+                head: 4c6e8f0a1b3c5d7e9f1a2b3c4d9a1f0c3d5e7b2a
+                base: 9a1f0c3d5e7b2a4c6e8f0a1b3c5d7e9f1a2b3c4d
+                sourceBase: 9a1f0c3d5e7b2a4c6e8f0a1b3c5d7e9f1a2b3c4d
+                behind: false
+                diff: |
+                  diff --git a/docs/docsai/v1/writing/create-a-page.md b/docs/docsai/v1/writing/create-a-page.md
+        "404":
+          description: Unknown project or branch.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                code: NOT_FOUND
   /api/projects/{project}/repository/review:
-    $ref: ./paths/review.yaml
+    parameters:
+      - name: project
+        in: path
+        required: true
+        description: Project id.
+        schema:
+          type: string
+          format: uuid
+    post:
+      operationId: reviewCommit
+      tags:
+        - Repository
+      summary: Submit, approve or request changes
+      description: |
+        Records a review action on the exact branch head. `submit` needs the draft permission;
+        `approve` and `request-changes` need the review permission. An approval belongs to one commit:
+        any later commit needs a new review.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReviewRequest"
+            example:
+              branch: work/author/components-page
+              expectedHead: 4c6e8f0a1b3c5d7e9f1a2b3c4d9a1f0c3d5e7b2a
+              action: approve
+              comment: Reads well.
+      responses:
+        "200":
+          description: Review recorded.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Review"
+              example:
+                status: approved
+                decision: approve
+                commit: 4c6e8f0a1b3c5d7e9f1a2b3c4d9a1f0c3d5e7b2a
+                branch: work/author/components-page
+        "409":
+          description: The branch moved after you loaded it.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                code: CONFLICT
+                message: Review commit changed. Reload the branch.
   /api/reader-pages:
-    $ref: ./paths/reader-pages.yaml
+    get:
+      operationId: listReaderPages
+      tags:
+        - Reader
+      summary: Find reader pages that show an API
+      description: Lists the published reader pages, across the tenant's projects, that embed a given Schema Studio API version.
+      parameters:
+        - name: apiId
+          in: query
+          required: true
+          description: Schema Studio API id.
+          schema:
+            type: string
+            format: uuid
+        - name: version
+          in: query
+          required: true
+          description: API version.
+          schema:
+            type: string
+            maxLength: 60
+      responses:
+        "200":
+          description: Reader pages.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pages:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        project:
+                          type: string
+                          format: uuid
+                        projectName:
+                          type: string
+                          examples:
+                            - DocsAI docs
+                        url:
+                          type: string
+                          format: uri
+                          examples:
+                            - http://acme.docs.localhost:4174/docsai-docs/docs/docsai/v1/console-api/
+              example:
+                pages:
+                  - project: 3f1c2b9e-7d4a-4c1e-9a55-0b8d2e6f4a10
+                    projectName: DocsAI docs
+                    url: http://acme.docs.localhost:4174/docsai-docs/docs/docsai/v1/console-api/
+        "400":
+          description: Missing or malformed API id or version.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                code: VALIDATION_FAILED
+                message: Choose an API and version.
   /api/notifications:
-    $ref: ./paths/notifications.yaml
+    get:
+      operationId: listNotifications
+      tags:
+        - Notifications
+      summary: Read your notifications
+      description: Returns your newest notifications, as shown under the bell in the console header.
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          description: How many items to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 200
+      responses:
+        "200":
+          description: Inbox.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Inbox"
+              example:
+                unread: 2
+                items:
+                  - id: 17
+                    at: 2026-11-13T21:39:59.289Z
+                    read: false
+                    type: publish.completed
+                    actor: synthetic-admin
+                    title: main
+                    project: 3f1c2b9e-7d4a-4c1e-9a55-0b8d2e6f4a10
+                    projectName: DocsAI docs
+                  - id: 16
+                    at: 2026-11-13T21:38:34.844Z
+                    read: false
+                    type: review.decided
+                    actor: synthetic-reviewer
+                    title: main
+                    project: 3f1c2b9e-7d4a-4c1e-9a55-0b8d2e6f4a10
+                    projectName: DocsAI docs
+        "400":
+          description: Limit out of range.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                code: VALIDATION_FAILED
+                message: Choose a limit from 1 to 200.
   /api/notifications/read:
-    $ref: ./paths/notifications-read.yaml
+    post:
+      operationId: markNotificationsRead
+      tags:
+        - Notifications
+      summary: Mark notifications read
+      description: Marks the given notification ids, or all of them, as read. Unknown ids are ignored.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - type: object
+                  required:
+                    - ids
+                  additionalProperties: false
+                  properties:
+                    ids:
+                      type: array
+                      maxItems: 200
+                      items:
+                        type: integer
+                        minimum: 1
+                - type: object
+                  required:
+                    - all
+                  additionalProperties: false
+                  properties:
+                    all:
+                      type: boolean
+                      const: true
+            example:
+              all: true
+      responses:
+        "200":
+          description: Remaining unread count.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  unread:
+                    type: integer
+              example:
+                unread: 0
+        "400":
+          description: Neither ids nor all was sent.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                code: VALIDATION_FAILED
+                message: "Send ids (positive integers, at most 200) or all: true."
 components:
   securitySchemes:
     consoleSession:
@@ -72,3 +796,439 @@ components:
       description: |
         A token of a service principal, for consoles whose IAM integration accepts bearer tokens.
         Your operator tells you whether yours does and issues the token. The Local mock accepts any value.
+  schemas:
+    Error:
+      type: object
+      description: Every failed request returns a stable code and, for most codes, a readable message.
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          description: Stable error code, for example `ACCESS_DENIED`, `CONFLICT` or `VALIDATION_FAILED`.
+          examples:
+            - CONFLICT
+        message:
+          type: string
+          description: Explanation for people. Do not parse it.
+          examples:
+            - The branch moved. Reload before creating a branch.
+        paths:
+          type: array
+          description: Files involved in a conflict, when the code is `CONFLICT` or `MERGE_CONFLICT`.
+          items:
+            type: string
+    Session:
+      type: object
+      required:
+        - principal
+        - capabilities
+      properties:
+        principal:
+          oneOf:
+            - type: object
+              required:
+                - id
+                - tenant
+              properties:
+                id:
+                  type: string
+                  description: Principal id from the identity provider.
+                  examples:
+                    - synthetic-author
+                tenant:
+                  type: string
+                  description: Tenant id.
+                  examples:
+                    - acme
+                name:
+                  type: string
+                  description: Display name.
+                  examples:
+                    - author
+            - type: "null"
+        platformAdmin:
+          type: boolean
+          description: True only for platform operators.
+        tenant:
+          type:
+            - object
+            - "null"
+          properties:
+            id:
+              type: string
+              examples:
+                - acme
+            name:
+              type: string
+              examples:
+                - Acme Corporation
+            readerOrigin:
+              type: string
+              format: uri
+              examples:
+                - http://acme.docs.localhost:4174
+        capabilities:
+          type: array
+          description: Permissions evaluated for the person, on the project when `project` is given.
+          items:
+            type: string
+            enum:
+              - draft
+              - review
+              - publish
+              - workspace
+              - manage-access
+              - read-insights
+              - read
+              - search
+        needsTeam:
+          type: boolean
+          description: True when the person belongs to no team yet.
+        demo:
+          type: boolean
+          description: True on the local demo console with synthetic identities.
+    BranchList:
+      type: object
+      required:
+        - branches
+        - defaultBranch
+      properties:
+        branches:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+              - head
+            properties:
+              name:
+                type: string
+                examples:
+                  - work/author/components-page
+              head:
+                type: string
+                description: Commit at the branch head.
+              remote:
+                type: boolean
+                description: True for the provider copy (`origin/...`).
+              personal:
+                type: boolean
+                description: True for a `work/<user>/<topic>` branch started in the console.
+              owner:
+                type:
+                  - string
+                  - "null"
+                examples:
+                  - synthetic-author
+              mine:
+                type: boolean
+              writable:
+                type: boolean
+                description: False for another person's personal branch.
+        defaultBranch:
+          type: string
+          examples:
+            - main
+        sourceBase:
+          type: string
+        me:
+          type: object
+          properties:
+            id:
+              type: string
+              examples:
+                - synthetic-author
+            slug:
+              type: string
+              examples:
+                - author
+            prefix:
+              type: string
+              examples:
+                - work/author/
+    StartedBranch:
+      type: object
+      required:
+        - branch
+        - head
+      properties:
+        branch:
+          type: string
+          examples:
+            - work/author/components-page
+        head:
+          type: string
+        base:
+          type: string
+        owner:
+          type: string
+          examples:
+            - synthetic-author
+        personal:
+          type: boolean
+          examples:
+            - true
+    Tree:
+      type: object
+      required:
+        - branch
+        - head
+        - files
+      properties:
+        branch:
+          type: string
+          examples:
+            - main
+        head:
+          type: string
+        areas:
+          type: array
+          items:
+            type: object
+            properties:
+              path:
+                type: string
+                examples:
+                  - docs/docsai/v1/api-docs/
+              team:
+                type: string
+                examples:
+                  - api
+        files:
+          type: array
+          items:
+            type: object
+            required:
+              - path
+              - blob
+              - editable
+            properties:
+              path:
+                type: string
+                examples:
+                  - docs/docsai/v1/writing/create-a-page.md
+              blob:
+                type: string
+                description: Git blob id. Send it back as `expectedBlob` when you save.
+              mode:
+                type: string
+                examples:
+                  - "100644"
+              editable:
+                type: boolean
+                description: True for cataloged pages and versioned API
+                schema and playground text files.: null
+              area:
+                type:
+                  - string
+                  - "null"
+                description: Team that owns the file through an area.
+                examples:
+                  - writers
+        documents:
+          type: array
+          description: Catalog documents with their section, order, lifecycle and classification.
+          items:
+            type: object
+        review:
+          type: object
+          description: Review state of the branch head.
+          properties:
+            status:
+              type: string
+              examples:
+                - draft
+            commit:
+              type: string
+    FileContent:
+      type: object
+      required:
+        - branch
+        - head
+        - path
+        - blob
+        - body
+      properties:
+        branch:
+          type: string
+          examples:
+            - main
+        head:
+          type: string
+        path:
+          type: string
+          examples:
+            - docs/docsai/v1/writing/create-a-page.md
+        blob:
+          type: string
+        body:
+          type: string
+          examples:
+            - |
+              # Create a page
+
+              Start a branch, then choose New page.
+        editable:
+          type: boolean
+          examples:
+            - true
+        byteLimit:
+          type:
+            - integer
+            - "null"
+          examples:
+            - 1048576
+    SaveFile:
+      type: object
+      required:
+        - branch
+        - path
+        - body
+        - message
+        - expectedHead
+        - expectedBlob
+      properties:
+        branch:
+          type: string
+          examples:
+            - work/author/components-page
+        path:
+          type: string
+          examples:
+            - docs/docsai/v1/writing/create-a-page.md
+        body:
+          type: string
+          description: Full new file text (UTF-8
+          at most 1 MiB).: null
+          examples:
+            - |
+              # Create a page
+
+              Updated text.
+        message:
+          type: string
+          maxLength: 500
+          description: One-line commit message.
+          examples:
+            - "docs(writing): clarify the New page form"
+        expectedHead:
+          type: string
+          description: Branch head you loaded.
+        expectedBlob:
+          type: string
+          description: Blob id of the file you loaded.
+    Diff:
+      type: object
+      required:
+        - branch
+        - head
+        - base
+        - diff
+      properties:
+        branch:
+          type: string
+        head:
+          type: string
+        base:
+          type: string
+          description: Merge base with the published base.
+        sourceBase:
+          type: string
+        behind:
+          type: boolean
+          description: True when the published base moved after the branch started.
+        diff:
+          type: string
+          description: Unified Git diff from the base to the branch head.
+    ReviewRequest:
+      type: object
+      required:
+        - branch
+        - expectedHead
+        - action
+      properties:
+        branch:
+          type: string
+          examples:
+            - work/author/components-page
+        expectedHead:
+          type: string
+          description: The exact commit you submit or decide on.
+        action:
+          type: string
+          enum:
+            - submit
+            - approve
+            - request-changes
+        comment:
+          type: string
+          maxLength: 2000
+    Review:
+      type: object
+      required:
+        - status
+        - commit
+      properties:
+        status:
+          type: string
+          examples:
+            - approved
+        decision:
+          type: string
+          examples:
+            - approve
+        commit:
+          type: string
+          description: The reviewed commit. A later commit needs a new review.
+        branch:
+          type: string
+    Inbox:
+      type: object
+      required:
+        - unread
+        - items
+      properties:
+        unread:
+          type: integer
+          examples:
+            - 2
+        items:
+          type: array
+          items:
+            type: object
+            required:
+              - id
+              - at
+              - type
+              - read
+            properties:
+              id:
+                type: integer
+                examples:
+                  - 17
+              at:
+                type: string
+                format: date-time
+              read:
+                type: boolean
+              type:
+                type: string
+                examples:
+                  - review.requested
+                description: One of review.requested, review.decided, publish.waiting, publish.completed, reader.issue, comment.created.
+              actor:
+                type: string
+                examples:
+                  - synthetic-reviewer
+              title:
+                type: string
+                examples:
+                  - work/author/components-page
+              project:
+                type: string
+                format: uuid
+              projectName:
+                type: string
+                examples:
+                  - DocsAI docs
