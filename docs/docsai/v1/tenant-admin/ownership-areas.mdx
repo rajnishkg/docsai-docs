@@ -1,6 +1,6 @@
 # Assign ownership areas
 
-An area makes a team the owner of a folder. Only the team's members, or project owners, can commit inside it, and a reviewer from that team approves changes to it. DocsAI writes the areas to `catalog.json` and keeps a matching block in `.github/CODEOWNERS`, so GitHub asks the same team to review pull requests.
+An area makes a team the owner of a folder. Only the team's members, or project owners, can commit inside it, and a reviewer from that team approves changes to it. DocsAI writes the areas to `catalog.json` and keeps a matching block in `.github/CODEOWNERS`.
 
 You need the **owner** role on the project.
 
@@ -10,7 +10,9 @@ You need the **owner** role on the project.
 
 ## Open Area ownership
 
-Choose the project in **Project**, open **Settings** and scroll to **Area ownership**. **Branch** names the branch the change is committed to; the line below it shows the branch head.
+Choose the project in **Project**, open **Settings** and scroll to **Area ownership**. In **Branch**, enter the branch to commit to, for example `work/author/components-page`, and leave the field: the line below it shows the branch head, here *Branch head 77c814af3dad*, and *No owned areas. Every path needs only the draft permission.*
+
+![Area ownership in Settings with the branch filled in](assets/docsai/v1/screenshots/ownership-areas/01-admin-area-ownership.png)
 
 </Step>
 
@@ -24,13 +26,17 @@ Choose **Add area**. Enter the **Path prefix**, a folder ending in `/`, and choo
 |---|---|
 | `apis/docsai/billing-sample/` | API team (`api`) |
 
+![A new area row with the path apis/docsai/billing-sample/ and the API team](assets/docsai/v1/screenshots/ownership-areas/02-admin-add-area.png)
+
 </Step>
 
 <Step>
 
 ## Save
 
-Choose **Save areas and CODEOWNERS**. DocsAI commits `catalog.json` and `.github/CODEOWNERS` to the branch. Like any commit, it reaches readers only after review and publish.
+Choose **Save areas and CODEOWNERS**. The console answers *Committed area ownership and .github/CODEOWNERS on work/author/components-page (9ed751e258b1).* Like any commit, it reaches readers only after review and publish, and the author must submit the new head again.
+
+![The saved area and the commit message](assets/docsai/v1/screenshots/ownership-areas/03-admin-areas-saved.png)
 
 </Step>
 
@@ -44,11 +50,20 @@ The result in `catalog.json`:
 ]
 ```
 
-DocsAI replaces only the lines between `# BEGIN DocsAI areas` and `# END DocsAI areas` in `.github/CODEOWNERS`. Add your own rules outside that block. A team is named in `CODEOWNERS` only when it has a **Provider team** (`org/team`) in **Settings → Teams**.
+and in `.github/CODEOWNERS`, between the DocsAI markers:
 
-<Callout type="warning" title="Areas restrict who can commit">
+```text title=".github/CODEOWNERS"
+# BEGIN DocsAI areas
+# Generated from catalog.json areas; DocsAI replaces only the lines inside this block.
+# /apis/docsai/billing-sample/ owned by DocsAI team api (no provider team)
+# END DocsAI areas
+```
 
-After you save an area, authors outside the owning team can no longer commit inside it, and changes inside it need a reviewer from that team. Give each area a team whose members will maintain and review it. Files outside every area need only the draft permission.
+The API team has no **Provider team** (`org/team`) in **Settings → Teams**, so the line is a comment and GitHub requests no reviewer. Give the team a provider team to turn it into a real `CODEOWNERS` rule.
+
+<Callout type="warning" title="The owning team must approve">
+
+In this repository the commit that added the area needed an approval from the API team too: the reviewer's approval was refused with *AREA_FORBIDDEN: This commit still needs approval from team api.* Before you add an area, make sure a member of the owning team holds the reviewer role on the project. See [Review and approve](/docs/docsai/v1/review-and-approve/).
 
 </Callout>
 

@@ -1,6 +1,6 @@
 # Write in the visual editor
 
-The visual editor lets you write a page as formatted text, without Markdown. In **Writing mode**, choose **Plain language**. What you write is saved as Markdown, so a reviewer sees an ordinary diff.
+The visual editor lets you write a page as formatted text, without Markdown. Open a page from **Tracked files** and choose **Plain language** in **Writing mode**. What you write is saved as Markdown, so a reviewer sees an ordinary diff, and **Document preview** on the right shows the page as readers will.
 
 ## Format text
 
@@ -8,7 +8,7 @@ The **Formatting** toolbar has **Heading**, **Subheading**, **Bold**, **Italic**
 
 ## Insert components
 
-The **Blocks** toolbar inserts the components readers see. Put the cursor where the block should go, then choose the block. When the cursor is inside a block, the toolbar shows that block's fields.
+The **Blocks** toolbar inserts the components readers see. Click in the paragraph the block should follow, then choose the block. When the cursor is inside a block, the toolbar shows that block's fields. See [Use reader components](/docs/docsai/v1/components/) for what each one looks like.
 
 <Steps>
 
@@ -16,7 +16,9 @@ The **Blocks** toolbar inserts the components readers see. Put the cursor where 
 
 ## Callout
 
-Choose **Callout**. Pick the **Callout type** (Note, Warning, Danger or Tip), type an optional **Title**, and write the text inside the box. **Remove callout** turns it back into plain paragraphs.
+Click in a paragraph and choose **Callout**: the paragraph becomes the callout's text. Pick the **Callout type** (**Note**, **Warning**, **Danger** or **Tip**) and type an optional **Title**. **Remove callout** turns it back into a paragraph.
+
+![A Warning callout titled Keep it private, with the Callout type and Title fields](assets/docsai/v1/screenshots/visual-editor/01-author-insert-callout.png)
 
 </Step>
 
@@ -24,7 +26,9 @@ Choose **Callout**. Pick the **Callout type** (Note, Warning, Danger or Tip), ty
 
 ## Steps
 
-Choose **Steps**. Each step has a heading and text. With the cursor in a step, choose **Add step** to add the next one or **Remove step** to delete it.
+Choose **Steps**. The editor inserts two steps, *First step* and *Second step*, each with a heading and text to replace. **Add step** adds the next one and **Remove step** deletes the one the cursor is in.
+
+![Inserted steps with the Add step and Remove step buttons](assets/docsai/v1/screenshots/visual-editor/02-author-insert-steps.png)
 
 </Step>
 
@@ -32,7 +36,9 @@ Choose **Steps**. Each step has a heading and text. With the cursor in a step, c
 
 ## Tabs
 
-Choose **Tabs**. With the cursor in a tab, change its **Tab label**, and choose **Add tab** or **Remove tab**.
+Choose **Tabs**. The editor inserts two tabs. With the cursor in a tab, change its **Tab label**, and choose **Add tab** or **Remove tab**.
+
+![Tabs with the Tab label field set to Bash](assets/docsai/v1/screenshots/visual-editor/03-author-insert-tabs.png)
 
 </Step>
 
@@ -40,7 +46,9 @@ Choose **Tabs**. With the cursor in a tab, change its **Tab label**, and choose 
 
 ## Cards
 
-Choose **Cards**. Click a card to select it, then fill in **Card title**, **Link** and **Description**. A link is a site route such as `/docs/docsai/v1/create-a-page/` or an `https` URL; the editor warns *Use a site route such as /docs/product/version/page/ or an https URL.* otherwise. **Add card** adds the next card.
+Choose **Cards**. Click a card to select it, then fill in **Card title**, **Link** and **Description**. A link is a site route such as `/docs/docsai/v1/create-a-page/` or an `https` URL; otherwise the editor warns *Use a site route such as /docs/product/version/page/ or an https URL.* **Add card** adds the next card.
+
+![A card with title, link and description fields filled in](assets/docsai/v1/screenshots/visual-editor/04-author-insert-cards.png)
 
 </Step>
 
@@ -48,15 +56,23 @@ Choose **Cards**. Click a card to select it, then fill in **Card title**, **Link
 
 ## Accordions
 
-Choose **Accordions**. With the cursor in a question, type the **Question** and the answer below it, and choose **Add accordion** for the next one. **Open** decides whether readers open **One at a time** or **Several at once**.
+Choose **Accordions**. With the cursor in an accordion, type the **Question**, and write the answer below it. **Add accordion** adds the next question. **Open** decides whether readers open **One at a time** or **Several at once**.
+
+![Accordions with the Open and Question fields](assets/docsai/v1/screenshots/visual-editor/05-author-insert-accordions.png)
 
 </Step>
 
 </Steps>
 
+<Callout type="warning" title="Fill in every card">
+
+**Cards** inserts two cards. A card left with the sample link fails validation when you commit: *Link target is not a selected public route.* Fill in both, or remove the one you do not need.
+
+</Callout>
+
 ## When a page opens in Markdown source
 
-The visual editor opens a page only when it can write it back unchanged. A page with raw HTML, an unknown component or an expression stays in **Markdown source**. When a block is written in another spelling that means the same, **Convert for visual editing** rewrites it in the canonical form.
+The visual editor opens a page only when it can write it back unchanged. Otherwise the console says *This document uses Markdown the visual editor cannot keep unchanged. Plain language is unavailable until the source passes.* and keeps the page in **Markdown source**. When the difference is only spelling, **Convert for visual editing** rewrites the blocks in the canonical form.
 
 ## Save your work
 
@@ -66,5 +82,5 @@ Type a **Commit message** and choose **Commit source changes**. Committing saves
 
 <Cards>
 <Card title="Edit Markdown source" href="/docs/docsai/v1/markdown-source/" description="Edit the exact text and insert snippets." />
-<Card title="Submit for review" href="/docs/docsai/v1/submit-for-review/" description="Commit and submit the exact commit." />
+<Card title="Use reader components" href="/docs/docsai/v1/components/" description="Every component with its source." />
 </Cards>

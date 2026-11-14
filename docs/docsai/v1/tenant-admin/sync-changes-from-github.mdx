@@ -1,6 +1,6 @@
 # Sync changes from GitHub
 
-The console works on its own copy of the repository. When someone commits to the default branch on GitHub, by merging a pull request or editing a file there, bring that commit into the console with **Sync source**, then into your branch with **Update from published base**.
+The console works on its own copy of the repository. When someone commits to the default branch on GitHub, by pushing, merging a pull request or editing a file there, bring that commit into the console with **Sync source**, then into a branch with **Update from published base**.
 
 <Steps>
 
@@ -8,37 +8,57 @@ The console works on its own copy of the repository. When someone commits to the
 
 ## Sync the source
 
-Sign in with the **publish** permission, choose **Content** and the project, and keep **Working branch** on the default branch. In the **GitHub Enterprise workflow** box, choose **Sync source**.
+Sign in with the **publish** permission, choose **Content** and the project. In the **GitHub Enterprise workflow** box, choose **Sync source**.
 
-DocsAI fetches the default branch from GitHub and moves the console's source forward. The console answers *Source synchronized. Existing author branches were retained. Use Update from published base on a branch to bring in the synchronized changes and resolve any conflicts.*
+![The GitHub Enterprise workflow box with Sync source](assets/docsai/v1/screenshots/sync-changes-from-github/01-admin-sync-source.png)
 
-</Step>
+After *Running explicit remote operation…* the console answers *Source synchronized. Existing author branches were retained. Use Update from published base on a branch to bring in the synchronized changes and resolve any conflicts.*
 
-<Step>
-
-## Update your branch
-
-Authors then select their branch in **Working branch** and choose **Update from published base**. DocsAI merges the synchronized commit into the branch and answers *Branch updated from the published base*, or that the branch *already contains the published base*. When both sides changed the same lines, the console lists the files to resolve; see [Resolve conflicts](/docs/docsai/v1/resolve-conflicts/).
+![Source synchronized message under the Sync source button](assets/docsai/v1/screenshots/sync-changes-from-github/02-admin-source-synchronized.png)
 
 </Step>
 
 <Step>
 
-## Publish the synchronized commit
+## Update the branch
 
-A sync does not change what readers see. To publish the GitHub commit, submit, approve and publish the default branch like any other change. See [Publish the reader site](/docs/docsai/v1/publish-the-reader-site/).
+Sync does not change any branch, not even `main` in the console. Select the branch in **Working branch**, `main` included, and choose **Update from published base**. The console merges the synchronized commit and answers *Branch updated from the published base · 〈commit〉. Submit the new commit for review.*, or that the branch *already contains the published base*.
+
+![Branch updated from the published base on main](assets/docsai/v1/screenshots/sync-changes-from-github/03-author-update-from-published-base.png)
+
+When both sides changed the same lines, the console lists the files to resolve; see [Resolve conflicts](/docs/docsai/v1/resolve-conflicts/).
+
+</Step>
+
+<Step>
+
+## Publish the synchronized change
+
+A sync never changes what readers see. Submit, approve and publish the updated branch like any other change. See [Publish the reader site](/docs/docsai/v1/publish-the-reader-site/).
 
 </Step>
 
 </Steps>
 
+After a pull request is merged on GitHub, the same **Sync source** brings the merge commit in:
+
+![Source synchronized after a pull request was merged on GitHub](assets/docsai/v1/screenshots/sync-changes-from-github/04-admin-sync-after-merge.png)
+
+<Callout type="info" title="The page header can lag behind">
+
+After **Sync source** or a commit, the **Exact branch commit** line at the top can still show the previous commit. Select the branch again in **Working branch** to reload it.
+
+</Callout>
+
 ## When sync is refused
 
-Sync only moves forward. It refuses when the console's source and GitHub have diverged, when GitHub's default branch went back in history, or when GitHub is behind a commit the console already published. Fix the history on GitHub (merge rather than force-push), then sync again.
+Sync only moves forward. It refuses when the console's source and GitHub have diverged, when GitHub's default branch went back in history, or when GitHub is behind a commit the console already published.
+
+**Update from published base** on `main` creates a merge commit that exists only in the console until a later console branch is pushed with **Push & open PR** and merged. Merge that pull request before you commit directly on GitHub's `main`, so GitHub contains everything the console published.
 
 ## Next steps
 
 <Cards>
 <Card title="Work with pull requests" href="/docs/docsai/v1/pull-requests/" description="Push a console branch and open a pull request." />
-<Card title="Edit on GitHub" href="/docs/docsai/v1/edit-on-github/" description="Change a page in the GitHub web editor." />
+<Card title="Edit on GitHub" href="/docs/docsai/v1/edit-on-github/" description="Change a page on GitHub." />
 </Cards>

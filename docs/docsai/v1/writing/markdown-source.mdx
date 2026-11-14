@@ -8,7 +8,9 @@ Markdown source shows the exact text of a page. Use it for tables, code and anyt
 
 ## Switch to Markdown source
 
-Open the page from **Tracked files** and choose **Markdown source** in **Writing mode**. The source editor shows the page with Markdown highlighting.
+Open the page from **Tracked files** and choose **Markdown source** in **Writing mode**. The source editor shows the page with line numbers and Markdown highlighting.
+
+![Writing mode set to Markdown source](assets/docsai/v1/screenshots/markdown-source/01-author-switch-to-markdown-source.png)
 
 </Step>
 
@@ -18,13 +20,17 @@ Open the page from **Tracked files** and choose **Markdown source** in **Writing
 
 Put the cursor on an empty line and choose a button in the **Insert block** toolbar: **Insert Callout**, **Insert Steps**, **Insert Tabs**, **Insert Cards** or **Insert Accordions**. The console inserts the component in the form the visual editor can open. Replace the sample text.
 
+![A Callout snippet inserted with Insert Callout](assets/docsai/v1/screenshots/markdown-source/02-author-insert-callout-snippet.png)
+
 </Step>
 
 <Step>
 
 ## Preview
 
-Choose **Preview** or **Split** above the editor to see the page as readers will. The preview uses the same rules as the reader site.
+Choose **Split** above the editor to see the source and the page side by side, or **Preview** for the page alone. The preview uses the same rules as the reader site.
+
+![Split view with the source and the rendered page](assets/docsai/v1/screenshots/markdown-source/03-author-split-preview.png)
 
 </Step>
 
@@ -32,7 +38,7 @@ Choose **Preview** or **Split** above the editor to see the page as readers will
 
 ## Commit
 
-Type a **Commit message** and choose **Commit source changes**. The console validates the page before it commits: unknown components, unsafe HTML and broken links are refused with a message that names the problem.
+Type a **Commit message** and choose **Commit source changes**. The console validates the page before it commits: unknown components, unsafe HTML and broken links are refused with *VALIDATION_FAILED: Content validation failed.* and the reason.
 
 </Step>
 
@@ -50,7 +56,7 @@ Never paste a token into a page.
 </Callout>
 ```
 
-The **Use reader components** page in this section shows every component with its source.
+See [Use reader components](/docs/docsai/v1/components/) for every component.
 
 ## Next steps
 

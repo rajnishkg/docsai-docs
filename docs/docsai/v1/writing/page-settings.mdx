@@ -8,7 +8,7 @@ Page settings hold everything about a page that is not its text: title, owner, c
 
 ## Open Page settings
 
-On your branch, open the page from **Tracked files** and expand **Page settings · published** (the summary shows the current lifecycle) below the editor.
+On your branch, open the page from **Tracked files** and expand **Page settings · published** below the editor (the summary shows the current lifecycle).
 
 </Step>
 
@@ -24,9 +24,13 @@ On your branch, open the page from **Tracked files** and expand **Page settings 
 | Lifecycle | **Draft**, **In review**, **Published** or **Archived**. Only Published pages are in a release. |
 | Review date | When the page must be checked again. A passed date shows in **Health**. |
 | Reader section | The sidebar group. Moving a page never changes its address. |
-| Page type | The template the page follows. The editor's **Page template** check then shows missing sections. |
+| Page type | The template the page follows, or **No page type**. |
 | Order in section | Position inside the section: lower numbers first. |
-| Page description | One plain sentence, at most 200 characters, shown under the title and used as the search description. |
+| Page description | *One plain sentence shown under the title and used as the page's search description (at most 200 characters).* |
+
+For the components page this site set the description, kept **Writing** as the section, cleared the page type and set the order to `50`.
+
+![Page settings with the description, section, page type and order filled in](assets/docsai/v1/screenshots/page-settings/01-author-edit-page-settings.png)
 
 </Step>
 
@@ -34,7 +38,9 @@ On your branch, open the page from **Tracked files** and expand **Page settings 
 
 ## Save
 
-Choose **Save page settings**. The console writes a catalog-only commit to your branch. It starts a new review cycle like any other commit.
+Choose **Save page settings**. The console writes a catalog-only commit and answers *Page settings committed · …*. It starts a new review cycle like any other commit.
+
+![Page settings committed message](assets/docsai/v1/screenshots/page-settings/02-author-page-settings-saved.png)
 
 </Step>
 

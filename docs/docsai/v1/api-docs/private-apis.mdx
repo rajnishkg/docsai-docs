@@ -2,9 +2,9 @@
 
 The reader site has no login. Anything in a release is public, so a private API is never published there. Private APIs stay in the console, where signed-in people read and test them in **Schema Studio**.
 
-This repository holds a sample: the **Billing sample API** in `apis/docsai/billing-sample/v1/`.
+This repository holds a sample: the **Billing sample API** in `apis/docsai/billing-sample/v1/openapi.yaml`.
 
-## Mark the API protected
+## Mark the repository entry protected
 
 In `catalog.json`, set the API's classification to `protected`:
 
@@ -12,17 +12,29 @@ In `catalog.json`, set the API's classification to `protected`:
 {"id": "billing-sample", "title": "Billing sample API (private)", "classification": "protected", "lifecycle": "published"}
 ```
 
-Releases leave out protected APIs, their guides and their assets. The reader site does not list the API and its address returns *not found*.
+Releases leave out protected APIs, their guides and their assets.
 
-## Read and test it in the console
+## Read and test it in Schema Studio
 
 <Steps>
 
 <Step>
 
-## Open Schema Studio
+## Add the definition
 
-Sign in to the console and choose **Schema Studio**. Open the API from the inventory, or add it with **Create or import definition**.
+Sign in to the console (here as **api-author**), choose **Schema Studio**, then **APIs** and **Create or import API**. Enter the **API title**, choose **API format** OpenAPI, enter the **Named API version**, paste the definition into **Import source** (or use **Import a local file**) and choose **Create API draft**. The console answers *Saved draft*.
+
+![The create form with the Billing sample API definition pasted in](assets/docsai/v1/screenshots/private-apis/01-author-create-definition.png)
+
+</Step>
+
+<Step>
+
+## Open the workspace
+
+The **APIs** list shows the API with its format, version, lifecycle (*draft*) and saved validation (*Passed*). Choose **Open workspace**.
+
+![The APIs list with the Billing sample API and Open workspace](assets/docsai/v1/screenshots/private-apis/02-author-open-workspace.png)
 
 </Step>
 
@@ -30,7 +42,9 @@ Sign in to the console and choose **Schema Studio**. Open the API from the inven
 
 ## Keep Reader visibility Private
 
-Each API version has **Reader visibility**. **Private** is the default: *Private versions are visible only to signed-in authors and reviewers in this console.* Leave it Private.
+Every API version has **Reader visibility**. **Private** is the default: *Private versions are visible only to signed-in authors and reviewers in this console.* Leave it Private and never use **Publish to readers** for it.
+
+![Reader visibility set to Private](assets/docsai/v1/screenshots/private-apis/03-author-reader-visibility-private.png)
 
 </Step>
 
@@ -38,7 +52,9 @@ Each API version has **Reader visibility**. **Private** is the default: *Private
 
 ## Read the reference
 
-Open the **Reference** view. It is the same API reference readers would see, shown only inside the console.
+Choose **Preview**. It is the same API reference readers would get, shown only inside the console.
+
+![The Preview view with the Billing sample API reference](assets/docsai/v1/screenshots/private-apis/04-author-preview-reference.png)
 
 </Step>
 
@@ -46,15 +62,27 @@ Open the **Reference** view. It is the same API reference readers would see, sho
 
 ## Try a request
 
-Open the **Test** view to send requests to the API's mock or sandbox servers, with the same playground as the reader site.
+Choose **Test**. The playground uses the definition's `servers`; a loopback server such as `http://127.0.0.1:4021` (*Local mock*) is treated as a mock. Expand **Authentication · IAM credentials**, enter a token for **bearerToken**, choose **List invoices** and **Send**: the mock answers *200 OK*.
+
+![The Test view with a 200 OK response from the local billing mock](assets/docsai/v1/screenshots/private-apis/05-author-test-request.png)
 
 </Step>
 
 </Steps>
 
+## Readers never see it
+
+The reader address of the sample, `/docs/docsai/v1/billing-sample/`, returns *not found*:
+
+![The reader site answering not found for the billing sample](assets/docsai/v1/screenshots/private-apis/06-reader-private-api-not-found.png)
+
+and the **Contract** list of the API reference offers only the public API:
+
+![The Contract list on the reader site with only the DocsAI console API](assets/docsai/v1/screenshots/private-apis/07-reader-contract-list.png)
+
 <Callout type="warning" title="Private is not secret">
 
-Private keeps the API off the public site. It does not encrypt the files: everyone with access to the GitHub repository can read them. Never store real credentials or customer data in an API definition or its examples.
+Private keeps the API off the public site. It does not encrypt the files: everyone who can read the GitHub repository can read them. This repository is public, so its sample is synthetic. Never store real credentials or customer data in a definition or its examples.
 
 </Callout>
 
@@ -62,5 +90,5 @@ Private keeps the API off the public site. It does not encrypt the files: everyo
 
 <Cards>
 <Card title="Publish an OpenAPI definition" href="/docs/docsai/v1/publish-an-openapi-definition/" description="Publish a public API reference." />
-<Card title="Roles and permissions" href="/docs/docsai/v1/roles/" description="Who can open Schema Studio." />
+<Card title="Assign ownership areas" href="/docs/docsai/v1/ownership-areas/" description="Let the API team own the folder." />
 </Cards>

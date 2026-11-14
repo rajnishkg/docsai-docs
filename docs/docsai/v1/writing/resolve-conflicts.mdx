@@ -1,6 +1,6 @@
 # Resolve conflicts
 
-A conflict happens when your branch and the published base changed the same lines, for example when someone edited the same paragraph on GitHub. The console resolves conflicts file by file, without Git commands.
+A conflict happens when your branch and the published base changed the same lines. In this example the author changed the first sentence of the *Roles and permissions* page on `work/author/roles-intro`, while someone changed the same sentence directly on GitHub and an admin chose **Sync source**. The console resolves conflicts file by file, without Git commands.
 
 <Steps>
 
@@ -8,7 +8,19 @@ A conflict happens when your branch and the published base changed the same line
 
 ## Update the branch
 
-On your branch, choose **Update from published base**. Without overlapping changes the console merges and answers *Branch updated from the published base*. With overlapping changes it answers that the update has conflicts in a number of files, *Resolve each file below; nothing was changed yet.*, and opens **Resolve conflicts with the published base**.
+On your branch, choose **Update from published base**.
+
+![Update from published base on the work/author/roles-intro branch](assets/docsai/v1/screenshots/resolve-conflicts/01-author-update-from-published-base.png)
+
+</Step>
+
+<Step>
+
+## See the conflicted files
+
+The console answers *Updating from the published base conflicts in 1 file(s). Resolve each file below; nothing was changed yet.* and opens **Resolve conflicts with the published base**: *For each file, edit the result. Conflict markers are rejected. Committing creates a merge commit on work/author/roles-intro; it needs a new review.*
+
+![Resolve conflicts with the published base, listing reference/roles.mdx](assets/docsai/v1/screenshots/resolve-conflicts/02-author-conflict-listed.png)
 
 </Step>
 
@@ -16,15 +28,19 @@ On your branch, choose **Update from published base**. Without overlapping chang
 
 ## Compare the versions
 
-Each conflicted file shows three read-only versions side by side: **Base (common ancestor)**, **Yours (branch)** and **Published**, and below them an editable **Result for** the file.
+Each file shows three read-only versions: **Base (common ancestor)**, **Yours (branch)** and **Published**.
+
+![Base, Yours and Published versions of the roles page](assets/docsai/v1/screenshots/resolve-conflicts/03-author-compare-versions.png)
 
 </Step>
 
 <Step>
 
-## Choose the result
+## Write the result
 
-Choose **Take yours** or **Take published** to start from one side, then edit the result until it reads right. Conflict markers (`<<<<<<<`) are rejected.
+Choose **Take yours** or **Take published** to start **Result for** the file from one side, then edit it until it reads right. Here the result keeps both changes: *Your permissions come from your teams.* from the branch and *on a single project* from GitHub. Conflict markers (`<<<<<<<`) are rejected. **Delete this file** removes the file instead.
+
+![The result with both changes, and the Take yours and Take published buttons](assets/docsai/v1/screenshots/resolve-conflicts/04-author-edit-result.png)
 
 </Step>
 
@@ -32,19 +48,21 @@ Choose **Take yours** or **Take published** to start from one side, then edit th
 
 ## Commit the merge
 
-Choose **Commit resolved merge**. The console answers *Merge committed* and the merge is a new commit on your branch: it needs a new review.
+Choose **Commit resolved merge**. The console answers *Merge committed · 〈commit〉. Submit the new commit for review.*
+
+![Merge committed message](assets/docsai/v1/screenshots/resolve-conflicts/05-author-merge-committed.png)
 
 </Step>
 
 </Steps>
 
-If the branch is also open as a pull request, choose **Push & open PR** after the merge: the pull request gets the resolved commit.
+If the branch is open as a pull request, choose **Push & open PR** after the merge: the pull request gets the resolved commit.
 
 ## Avoid conflicts
 
 - Keep branches short-lived and focused on one topic.
 - Choose **Update from published base** before you start a long edit.
-- Agree who edits a page when two people change it the same day. The console shows others active on the same file.
+- Agree who edits a page when two people change it the same day.
 
 ## Next steps
 
