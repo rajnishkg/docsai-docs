@@ -10,7 +10,7 @@ You need the **owner** role in the tenant and a verified GitHub connection. See 
 
 ## Open Create project
 
-Choose **Repositories**, then **Create project**. The form **Create a DocsAI project** opens.
+Choose **Repositories**, then **Create project**. The form **Create a DocsAI project** opens: *Choose a configured enterprise Git provider. Creation initializes one starter catalog and branch after you confirm.*
 
 ![Create a DocsAI project form in Repositories](assets/docsai/v1/screenshots/create-documentation-repository/01-admin-open-create-project.png)
 
@@ -24,12 +24,12 @@ Fill in the form:
 
 | Field | Example | Notes |
 |---|---|---|
-| Enterprise provider | GitHub | The connection you verified. |
+| Enterprise provider | GitHub | The connection you verified. It shows **Verified**. |
 | Owner / group | `rajnishkg` | The GitHub user or organization that will own the repository. |
 | Repository name | `docsai-docs` | Lowercase words joined by hyphens. |
 | Project name | `DocsAI docs` | The name people see in the console's **Project** list. |
-| Default branch | `main` | Published releases are built from this branch. |
-| Visibility | Public | **Private**, **Internal** or **Public** on GitHub. Reader pages are public either way once published. |
+| Default branch | `main` | Releases are built from this branch. |
+| Visibility | Public | **Private**, **Internal** or **Public** on GitHub. Published reader pages are public either way. |
 
 ![The form filled in for a public repository named docsai-docs](assets/docsai/v1/screenshots/create-documentation-repository/02-admin-fill-repository-details.png)
 
@@ -41,7 +41,19 @@ Fill in the form:
 
 Choose **Create project and repository** and confirm the dialog *Create rajnishkg/docsai-docs on GitHub? This will create the remote repository and push one DocsAI template commit.*
 
-DocsAI creates the repository, pushes the starter commit and opens the new project.
+After about 20 seconds the new project opens in **Content**, on the default branch, with *Opened exact Git source.*
+
+![The new DocsAI docs project open in Content](assets/docsai/v1/screenshots/create-documentation-repository/03-admin-project-created.png)
+
+</Step>
+
+<Step>
+
+## Check the repository on GitHub
+
+The repository now has one commit, *Initialize DocsAI documentation project*, by *DocsAI project initializer*.
+
+![The new public repository on GitHub with the starter folders](assets/docsai/v1/screenshots/create-documentation-repository/04-reader-github-starter-repository.png)
 
 </Step>
 
@@ -49,7 +61,7 @@ DocsAI creates the repository, pushes the starter commit and opens the new proje
 
 <Callout type="warning" title="QUOTA_EXCEEDED">
 
-If the tenant has reached its storage limit, creation stops with *QUOTA_EXCEEDED: This change needs … bytes, but the tenant uses … of its … bytes of storage.* Nothing is created on GitHub. Ask your platform operator to raise the limit (**Platform → Edit limits**), then try again. **Settings → Usage and limits** shows the current usage.
+When the tenant is over its storage limit, creation stops with *QUOTA_EXCEEDED: This change needs 0 more bytes, but the tenant uses … of its … bytes of storage.* Nothing is created on GitHub. **Settings → Usage and limits** shows the usage; only your platform operator can raise the limit or free storage.
 
 </Callout>
 
@@ -57,14 +69,14 @@ If the tenant has reached its storage limit, creation stops with *QUOTA_EXCEEDED
 
 | Path | Purpose |
 |---|---|
-| `catalog.json` | The catalog: one product `docsai`, version `v1`, the default sections and one starter page. |
+| `catalog.json` | The catalog: product `docsai`, version `v1`, the default sections and one starter page. |
 | `docs/docsai/v1/getting-started.md` | The starter page. |
 | `.github/CODEOWNERS` | Ownership rules. DocsAI maintains the block between `# BEGIN DocsAI areas` and `# END DocsAI areas`. |
 | `apis/`, `assets/`, `schemas/`, `playground/`, `manual-sources/` | Folders for API definitions, images, schemas, playground settings and PDF manuals, each with a README. |
 
 ## Replace the starter content
 
-To start from your own content, clone the repository, replace the starter files and push one commit to the default branch. The commands below are the ones used to set up this site.
+To start from your own content, clone the repository, replace the starter files and push one commit to the default branch. These are the commands used to set up this site:
 
 <Tabs groupId="shell" persist="true">
 
@@ -74,7 +86,7 @@ To start from your own content, clone the repository, replace the starter files 
 git clone https://github.com/rajnishkg/docsai-docs.git
 cd docsai-docs
 git rm -q docs/docsai/v1/getting-started.md
-# copy your catalog.json, README.md, docs/, apis/ and playground/ into the clone
+# copy catalog.json, README.md, docs/, apis/, assets/ and playground/ into the clone
 git add -A
 git commit -m "docs(get-started): add the DocsAI user documentation"
 git push origin main
@@ -88,7 +100,7 @@ git push origin main
 git clone https://github.com/rajnishkg/docsai-docs.git
 Set-Location docsai-docs
 git rm -q docs/docsai/v1/getting-started.md
-# copy your catalog.json, README.md, docs/, apis/ and playground/ into the clone
+# copy catalog.json, README.md, docs/, apis/, assets/ and playground/ into the clone
 git add -A
 git commit -m "docs(get-started): add the DocsAI user documentation"
 git push origin main
@@ -98,7 +110,14 @@ git push origin main
 
 </Tabs>
 
-Then open the project in the console and choose **Sync source**, so DocsAI picks up the new commit. See [Sync changes from GitHub](/docs/docsai/v1/sync-changes-from-github/).
+The push answers:
+
+```text title="Output"
+To https://github.com/rajnishkg/docsai-docs.git
+   36cf3de..4c95954  main -> main
+```
+
+Then, in the console, choose **Sync source** and, on the default branch, **Update from published base**, so the project picks up the commit. See [Sync changes from GitHub](/docs/docsai/v1/sync-changes-from-github/).
 
 <Callout type="info" title="Pushing to main skips review">
 

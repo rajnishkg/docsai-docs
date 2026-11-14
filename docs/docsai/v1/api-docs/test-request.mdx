@@ -6,17 +6,21 @@ Every operation on an API reference page has a **Test Request** button. It opens
 
 <Step>
 
-## Open the API reference
+## Choose Test Request
 
-Open the API in the sidebar, for example [DocsAI console API](/docs/docsai/v1/console-api/). The reference lists every operation by tag, with its parameters, request body, responses and examples.
+Open the API, for example [DocsAI console API](/docs/docsai/v1/console-api/), and choose a tag in the reference sidebar, here **Session**. Next to **Get the current session**, the request sample shows `GET /api/session` and the URL on the test server. Choose **Test Request**.
+
+![The Get the current session operation with its Test Request button](assets/docsai/v1/screenshots/test-request/01-reader-choose-test-request.png)
 
 </Step>
 
 <Step>
 
-## Choose Test Request
+## The playground opens
 
-Find the operation, for example **Get the current session** (`GET /api/session`), and choose **Test Request**. The playground opens with that operation selected.
+The playground opens in a new tab with that operation selected, the test server in **API environment** and the request's headers and query parameters.
+
+![The playground with GET /api/session on the Local mock](assets/docsai/v1/screenshots/test-request/02-reader-playground-opens.png)
 
 </Step>
 
@@ -24,13 +28,15 @@ Find the operation, for example **Get the current session** (`GET /api/session`)
 
 ## Send
 
-Check **API environment**, fill in any parameters and choose **Send**. The response appears below the request. See [Use the API playground](/docs/docsai/v1/api-playground/).
+Choose **Send**. The response appears on the right: here *200 OK* from the Local mock, with the example session as the body.
+
+![The 200 OK response with the session body](assets/docsai/v1/screenshots/test-request/03-reader-response.png)
 
 </Step>
 
 </Steps>
 
-**Test Request** is unavailable when the API has no enabled mock or sandbox server. Its tooltip says why. See [Declare test servers](/docs/docsai/v1/test-servers/).
+**Test Request** is unavailable when the API has no enabled mock or sandbox server. See [Declare test servers](/docs/docsai/v1/test-servers/).
 
 ## Next steps
 

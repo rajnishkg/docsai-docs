@@ -1,16 +1,28 @@
 # Publish the reader site
 
-Publishing builds an immutable release from one approved commit and makes it the version readers see. The reader site is public and has no login.
+Publishing builds an immutable release from one approved commit and makes it the version readers see. The reader site is public and has no login. This is how the first release of this site was published, from the default branch `main`.
 
-You need the **publish** permission (the **publisher** or **owner** role). The commit must already be approved; see [Review and approve](/docs/docsai/v1/review-and-approve/).
+You need the **publish** permission (the **publisher** or **owner** role).
 
 <Steps>
 
 <Step>
 
-## Open the approved branch
+## The author submits
 
-Choose **Content**, choose the project, and select the branch in **Working branch**. **Before you can publish** lists anything still missing, such as an approval.
+The author opens **Content**, selects the branch in **Working branch** and chooses **Submit commit for review**. The console answers *Commit submitted for review*.
+
+![Submit commit for review on the main branch](assets/docsai/v1/screenshots/publish-the-reader-site/01-author-submit-main.png)
+
+</Step>
+
+<Step>
+
+## A reviewer approves
+
+A reviewer opens the same branch and chooses **Approve exact commit**. The console answers *Exact commit approved.* See [Review and approve](/docs/docsai/v1/review-and-approve/).
+
+![Approve exact commit as the reviewer](assets/docsai/v1/screenshots/publish-the-reader-site/02-reviewer-approve-main.png)
 
 </Step>
 
@@ -18,7 +30,13 @@ Choose **Content**, choose the project, and select the branch in **Working branc
 
 ## Publish
 
-Choose **Publish approved commit to current guides**. The console answers *Publication queued. Status updates automatically.* The build runs in the background; you can leave the page.
+Sign in as a publisher and open the branch. The box changes from **Before you can publish** to **Ready to publish**: *The selected branch commit is approved. Publish will build and update the current guides.* Choose **Publish approved commit to current guides**.
+
+![Ready to publish and the Publish approved commit to current guides button](assets/docsai/v1/screenshots/publish-the-reader-site/03-admin-publish-approved-commit.png)
+
+The console answers *Publication queued for the current guides.* The build runs in the background; you can leave the page.
+
+![Publication queued for the current guides](assets/docsai/v1/screenshots/publish-the-reader-site/04-admin-publication-queued.png)
 
 </Step>
 
@@ -26,7 +44,9 @@ Choose **Publish approved commit to current guides**. The console answers *Publi
 
 ## Follow the build
 
-Choose **Deployments**. The job shows its source commit and its state. When it says **published**, choose **Open published documentation ↗**.
+Choose **Deployments**. The job shows when it was queued and completed, its job id and its **Source commit**. The first build of this site took about 80 seconds. When it says **published**, choose **Open published documentation ↗**.
+
+![Deployments with the published job and the Open published documentation link](assets/docsai/v1/screenshots/publish-the-reader-site/05-admin-deployments.png)
 
 </Step>
 
@@ -34,7 +54,9 @@ Choose **Deployments**. The job shows its source commit and its state. When it s
 
 ## Check the site address
 
-In **Settings → Reader site**, **Reader address** is your tenant's reader origin, and **Project site** shows where this project is published, for example `http://acme.docs.localhost:4174/docsai-docs/`. Change the last part with **Site slug** and **Save site slug**.
+In **Settings → Reader site**, **Reader address** is your tenant's reader origin, and **Project site** says where this project is published: *This project is published at http://acme.docs.localhost:4174/docsai-docs/ on the reader site.* **Site slug** changes the last part. Changing it takes the published site offline until the project is published again.
+
+![Reader site settings with the project site address and site slug](assets/docsai/v1/screenshots/publish-the-reader-site/06-admin-reader-site-settings.png)
 
 </Step>
 
@@ -44,13 +66,13 @@ In **Settings → Reader site**, **Reader address** is your tenant's reader orig
 
 - Only pages whose catalog entry is `public` and `published`. Drafts, pages in review, archived and `protected` pages are never in a release.
 - The sidebar grouped by the version's sections, each with its icon, and each page's description under its title.
-- A Markdown copy of every page (`<page>.md`), search, and the API reference with **Test Request**.
+- **Copy Markdown** on every page, search, and the API reference with **Test Request**.
 
-Every release also keeps its own address, so a link to an older release keeps working.
+Every release also keeps its own address under `/releases/<id>/`, so a link to an older release keeps working.
 
 <Callout type="info" title="Custom domain">
 
-To serve the site on your own host, enter it under **Custom domain** and choose **Request custom domain**. It is served once your platform operator approves it. Put the reader behind your own TLS proxy.
+To serve the site on your own host, enter it under **Custom domain** and choose **Request custom domain**. A new domain is served once your platform operator approves it. DocsAI does not issue certificates: put the reader behind your TLS proxy.
 
 </Callout>
 

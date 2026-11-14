@@ -4,45 +4,61 @@ You can change a page directly on GitHub, for a quick fix or when you are alread
 
 ## Find the page
 
-Every page is a Markdown file under `docs/docsai/v1/<section>/<slug>.md` or `.mdx`. On the repository page, open `docs`, then `docsai`, `v1` and the section folder. The file name is the page slug: the page at `/docs/docsai/v1/connect-github/` is `docs/docsai/v1/tenant-admin/connect-github.mdx`.
-
-## Edit in the browser
-
 <Steps>
 
 <Step>
 
-## Open the editor
+## Open the repository
 
-Sign in to GitHub, open the file and choose the pencil icon (**Edit this file**). You need write access to the repository; without it, GitHub offers to fork it and open a pull request.
+Open the repository on GitHub, here [github.com/rajnishkg/docsai-docs](https://github.com/rajnishkg/docsai-docs). The `README.md` at the root is the contributor guide; it is not published.
 
-</Step>
-
-<Step>
-
-## Change the text
-
-Edit the Markdown. Keep components in the canonical form: each tag alone on its line, a blank line inside the block, double-quoted attributes. See [Edit Markdown source](/docs/docsai/v1/markdown-source/).
+![The docsai-docs repository home on GitHub](assets/docsai/v1/screenshots/edit-on-github/01-reader-repository-home.png)
 
 </Step>
 
 <Step>
 
-## Commit
+## Open the section folder
 
-Choose **Commit changes**. Use a message in the form `docs(<section>): <change>`. Prefer **Create a new branch for this commit and start a pull request**, named `work/<you>/<topic>`, so a reviewer sees the change before it reaches the default branch. See [Work with pull requests](/docs/docsai/v1/pull-requests/).
+Pages live under `docs/docsai/v1/<section>/`. Open `docs`, `docsai`, `v1` and the section, for example `reference`.
+
+![The reference section folder on GitHub](assets/docsai/v1/screenshots/edit-on-github/02-reader-section-folder.png)
+
+</Step>
+
+<Step>
+
+## Open the file
+
+The file name is the page slug: the page at `/docs/docsai/v1/faq/` is `docs/docsai/v1/reference/faq.mdx`. GitHub shows the Markdown, components included.
+
+![The FAQ page file on GitHub](assets/docsai/v1/screenshots/edit-on-github/03-reader-page-file.png)
 
 </Step>
 
 </Steps>
 
+## Edit and commit
+
+Sign in to GitHub, open the file and choose the pencil icon (**Edit this file**). You need write access to the repository; without it, GitHub offers to fork it and open a pull request.
+
+Edit the Markdown. Keep components in the canonical form: each tag alone on its line, a blank line inside the block, double-quoted attributes (see [Edit Markdown source](/docs/docsai/v1/markdown-source/)). Then choose **Commit changes** with a message in the form `docs(<section>): <change>`. Prefer **Create a new branch for this commit and start a pull request**, named `work/<you>/<topic>`, so a reviewer sees the change before it reaches the default branch.
+
+The commit made for this page, `docs(reference): tighten the FAQ intro`, changed one line of the FAQ directly on `main`:
+
+![The commit on GitHub changing the first line of the FAQ](assets/docsai/v1/screenshots/edit-on-github/04-reader-commit-on-github.png)
+
 ## Bring the commit into DocsAI
 
-When the change is on the default branch (committed there or merged), an admin chooses **Sync source** in **Content**. Then the change goes through review and publish like any other commit. See [Sync changes from GitHub](/docs/docsai/v1/sync-changes-from-github/).
+An admin opens **Content** and chooses **Sync source**. The console answers *Source synchronized. Existing author branches were retained. …*
+
+![Source synchronized after the commit on GitHub](assets/docsai/v1/screenshots/edit-on-github/05-admin-sync-github-edit.png)
+
+Then the change goes through review and publish like any other commit. A branch that changed the same line gets a conflict on **Update from published base**; see [Resolve conflicts](/docs/docsai/v1/resolve-conflicts/).
 
 <Callout type="warning" title="Edits to catalog.json">
 
-A page added on GitHub also needs its entry in `catalog.json`, and every image must be listed in `assets`. **Health** lists catalog and link problems of the default branch, and a release with errors is refused. Creating pages with **New page** in the console writes both for you.
+A page added on GitHub also needs its entry in `catalog.json`, and every image must be listed in `assets` and in the page's own `assets`. **Health** lists catalog and link problems of the default branch, and a release with errors is refused. Creating pages with **New page** in the console writes both for you.
 
 </Callout>
 

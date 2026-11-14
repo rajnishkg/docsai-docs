@@ -1,3 +1,4 @@
+# Billing sample API (private), one file.
 openapi: 3.1.0
 info:
   title: Billing sample API
@@ -13,6 +14,8 @@ info:
     name: DocsAI documentation team
     url: https://github.com/rajnishkg/docsai-docs
 servers:
+  - url: http://127.0.0.1:4021
+    description: Local mock
   - url: https://billing.example.invalid/v1
     description: Example host (does not resolve)
 tags:
@@ -22,9 +25,96 @@ security:
   - bearerToken: []
 paths:
   /invoices:
-    $ref: ./paths/invoices.yaml
+    get:
+      operationId: listInvoices
+      tags:
+        - Invoices
+      summary: List invoices
+      description: Lists invoices, newest first, optionally only one status.
+      parameters:
+        - name: status
+          in: query
+          required: false
+          description: Only invoices with this status.
+          schema:
+            type: string
+            enum:
+              - draft
+              - open
+              - paid
+              - void
+      responses:
+        "200":
+          description: Invoices.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Invoice"
+              example:
+                items:
+                  - id: inv_0002
+                    customer: cus_example
+                    status: open
+                    currency: EUR
+                    total: 4900
+                    issuedAt: 2026-11-01
+                  - id: inv_0001
+                    customer: cus_example
+                    status: paid
+                    currency: EUR
+                    total: 12900
+                    issuedAt: 2026-10-01
+        "401":
+          description: Missing or expired token.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                code: UNAUTHENTICATED
+                message: Send a bearer token.
   /invoices/{invoiceId}:
-    $ref: ./paths/invoice.yaml
+    parameters:
+      - name: invoiceId
+        in: path
+        required: true
+        description: Invoice id.
+        schema:
+          type: string
+    get:
+      operationId: getInvoice
+      tags:
+        - Invoices
+      summary: Get an invoice
+      description: Returns one invoice.
+      responses:
+        "200":
+          description: The invoice.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Invoice"
+              example:
+                id: inv_0001
+                customer: cus_example
+                status: paid
+                currency: EUR
+                total: 12900
+                issuedAt: 2026-10-01
+        "404":
+          description: No invoice with this id.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                code: NOT_FOUND
+                message: No invoice inv_9999.
 components:
   securitySchemes:
     bearerToken:
@@ -34,22 +124,47 @@ components:
   schemas:
     Invoice:
       type: object
-      required: [id, customer, status, total]
+      required:
+        - id
+        - customer
+        - status
+        - total
       properties:
-        id: {type: string, examples: [inv_0001]}
-        customer: {type: string, examples: [cus_example]}
+        id:
+          type: string
+          examples:
+            - inv_0001
+        customer:
+          type: string
+          examples:
+            - cus_example
         status:
           type: string
-          enum: [draft, open, paid, void]
-        currency: {type: string, examples: [EUR]}
+          enum:
+            - draft
+            - open
+            - paid
+            - void
+        currency:
+          type: string
+          examples:
+            - EUR
         total:
           type: integer
           description: Amount in the smallest currency unit.
-          examples: [12900]
-        issuedAt: {type: string, format: date}
+          examples:
+            - 12900
+        issuedAt:
+          type: string
+          format: date
     Error:
       type: object
-      required: [code]
+      required:
+        - code
       properties:
-        code: {type: string, examples: [NOT_FOUND]}
-        message: {type: string}
+        code:
+          type: string
+          examples:
+            - NOT_FOUND
+        message:
+          type: string

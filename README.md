@@ -10,8 +10,8 @@ It contains only documentation and sample APIs. Never add secrets, personal data
 catalog.json                     products, sections, documents, assets and APIs (schema version 2)
 docs/docsai/v1/<section>/        one Markdown/MDX file per page; the file name is the page slug
 assets/docsai/v1/screenshots/    <page-slug>/NN-<role>-<action>.png
-apis/docsai/console-api/v1/      public OpenAPI 3.1 definition of the DocsAI console API
-apis/docsai/billing-sample/v1/   protected sample API (console only, never published)
+apis/docsai/console-api/v1/      public OpenAPI 3.1 definition of the DocsAI console API (one file) and its guides
+apis/docsai/billing-sample/v1/   protected sample API (console only, never published; owned by the api team)
 playground/environments.yaml     repository-wide test servers (empty; the console API declares its own)
 .github/CODEOWNERS               ownership; DocsAI maintains its own block
 ```
@@ -28,13 +28,16 @@ Sections: `get-started`, `tenant-admin`, `writing`, `github`, `api-docs`, `refer
 
 See the published page *Naming conventions* for every naming rule.
 
-## Run the API mock
+## Run the API mocks
 
-The console API declares a `mock` test server at `http://127.0.0.1:4020`:
+The console API declares a `mock` test server at `http://127.0.0.1:4020`; the billing sample lists `http://127.0.0.1:4021` in its `servers` for the Schema Studio Test view:
 
 ```bash
 npx @stoplight/prism-cli mock apis/docsai/console-api/v1/openapi.yaml --host 127.0.0.1 --port 4020
+npx @stoplight/prism-cli mock apis/docsai/billing-sample/v1/openapi.yaml --host 127.0.0.1 --port 4021
 ```
+
+Keep each API definition in one `openapi.yaml`: the reader renders operations from the entry file only.
 
 ## License
 

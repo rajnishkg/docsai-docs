@@ -6,9 +6,11 @@ Reviewers decide on the exact commit an author submitted. You need the **reviewe
 
 <Step>
 
-## Find the submission
+## Open the submitted branch
 
-Open the bell in the console header, or choose **Content**, the project, and the author's branch in **Working branch**. **Review status** shows *submitted*.
+Open the bell in the console header, or choose **Content**, the project, and the author's branch in **Working branch**. **Review status** shows *in-review*.
+
+![The reviewer selects work/author/components-page in Working branch](assets/docsai/v1/screenshots/review-and-approve/01-reviewer-open-branch.png)
 
 </Step>
 
@@ -16,7 +18,9 @@ Open the bell in the console header, or choose **Content**, the project, and the
 
 ## Read the change
 
-Read **Git diff from cloned source**, and open changed pages with **Preview** to see them as readers will. Select text in the preview, or choose **Comment** beside a heading, to start a discussion on a line.
+Expand **Git diff from cloned source** and read every changed line. Open changed pages with **Preview** to see them as readers will; select text there, or choose **Comment** beside a heading, to start a discussion.
+
+![Git diff from cloned source with the CODEOWNERS and API changes](assets/docsai/v1/screenshots/review-and-approve/02-reviewer-read-diff.png)
 
 </Step>
 
@@ -26,15 +30,35 @@ Read **Git diff from cloned source**, and open changed pages with **Preview** to
 
 Type an optional **Commit review comment**, then choose **Approve exact commit** or **Request commit changes**. An approval answers *Exact commit approved.*
 
+When the change touches an ownership area, the box says which team must approve, for example *Needs approval from team api (every team must be covered by an approval from one of its members holding review; … still waiting for team api).* A reviewer outside that team is refused with *AREA_FORBIDDEN: This commit still needs approval from team api. A reviewer who is a member of that team, or a project owner, must approve it.*
+
+![The review box asking for an approval from team api](assets/docsai/v1/screenshots/review-and-approve/03-reviewer-approve-exact-commit.png)
+
+</Step>
+
+<Step>
+
+## The owning team approves
+
+A member of the owning team who holds the reviewer role on the project approves. Here the API team holds **reviewer** through a project grant (see [Manage users and roles](/docs/docsai/v1/users-and-roles/)). The box then shows *Approved so far: team api by synthetic-api-author.*
+
+![Exact commit approved by a member of the API team](assets/docsai/v1/screenshots/review-and-approve/04-reviewer-api-team-approves.png)
+
+</Step>
+
+<Step>
+
+## Publish
+
+A publisher opens the branch, sees **Ready to publish** and chooses **Publish approved commit to current guides**. See [Publish the reader site](/docs/docsai/v1/publish-the-reader-site/).
+
+![Ready to publish on the approved branch](assets/docsai/v1/screenshots/review-and-approve/05-admin-publish-branch.png)
+
 </Step>
 
 </Steps>
 
-An approval belongs to that commit only. If the author commits again, the approval does not carry over.
-
-## Publish
-
-When the reviewer also has the **publish** permission, approving starts the reader release. Otherwise the change waits for a publisher, who opens the branch and chooses **Publish approved commit to current guides**. See [Publish the reader site](/docs/docsai/v1/publish-the-reader-site/).
+An approval belongs to that commit only. If the author commits again, the approval does not carry over. When the reviewer also has the **publish** permission, approving starts the reader release directly.
 
 ## Next steps
 

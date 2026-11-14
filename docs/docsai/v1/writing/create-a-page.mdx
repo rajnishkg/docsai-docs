@@ -1,6 +1,6 @@
 # Create a page
 
-Every change starts on a branch. **New page** then writes the Markdown file and its `catalog.json` entry together, in one commit on that branch.
+Every change starts on a branch. **New page** then writes the Markdown file and its `catalog.json` entry together, in one commit on that branch. This is how the [Use reader components](/docs/docsai/v1/components/) page of this site was created.
 
 You need the **contributor** role on the project.
 
@@ -10,27 +10,46 @@ You need the **contributor** role on the project.
 
 ## Start a branch
 
-Choose **Content** and the project. In **Start editing topic**, type a short topic in lowercase words joined by hyphens, for example `components-page`, and choose **Start editing**. The console creates `work/<you>/<topic>` from the published base and selects it in **Working branch**.
+Choose **Content** and the project. In **Start editing topic**, type a short topic in lowercase words joined by hyphens, for example `components-page`, and choose **Start editing**. The console creates `work/<you>/components-page` from the published base and selects it in **Working branch**.
+
+![Start editing topic filled in with components-page](assets/docsai/v1/screenshots/create-a-page/01-author-start-editing.png)
 
 </Step>
 
 <Step>
 
-## Open New page
+## Choose a page type
 
-Under **New Markdown page**, choose **New page** and fill in the form:
+Under **New Markdown page**, choose **New page**. Enter the **Page title** and **Slug**, then pick a **Page type (optional)**. The type fills **Initial Markdown** with its template and names a suggested folder, for example *Starts from the feature-guide template. Suggested folder: concepts/ (selected when it is an area).* **Reader section** keeps **No section** when the type's default section is not one of the version's sections.
+
+![Page type Feature guide chosen in the New page form](assets/docsai/v1/screenshots/create-a-page/02-author-choose-page-type.png)
+
+</Step>
+
+<Step>
+
+## Choose section, folder and first text
 
 | Field | What to enter |
 |---|---|
 | Page title | A title that starts with a verb for tasks, for example *Use reader components*. |
-| Slug | The page address and file name, for example `components`. Unique in the version. |
-| Product, Version | Where the page belongs, for example `docsai` and `v1`. |
-| Page type (optional) | A template. Choosing one fills **Initial Markdown** with the template's headings and suggests a section and folder. |
-| Reader section | The sidebar group readers see the page in. |
-| Folder (optional) | The folder of the file, for example `writing`. The line below shows the path, such as `Creates docs/docsai/v1/writing/components.md`. |
-| Initial Markdown | The first text of the page. You can also leave the template text and write later. |
+| Slug | The address and file name, for example `components`. Unique in the version. |
+| Product, Version | Where the page belongs, here `DocsAI · docsai` and `v1`. |
+| Reader section | The sidebar group, here **Writing**. |
+| Folder (optional) | The folder of the file, here `writing/ · existing folder`. The line below shows the result: *Creates docs/docsai/v1/writing/components.md*. |
+| Initial Markdown | The first text. Replace the template text or keep it to fill in later. |
 
-Open **Page settings** in the form to set the description, owner, review date and lifecycle now. The lifecycle starts as **Draft**; readers never see a draft. Choose **Published** when the page is meant for readers once it is approved.
+![The New page form with section Writing, folder writing/ and the Initial Markdown](assets/docsai/v1/screenshots/create-a-page/03-author-fill-new-page.png)
+
+</Step>
+
+<Step>
+
+## Set the lifecycle
+
+Open **Page settings** at the bottom of the form. Set **Owner**, **Classification**, **Lifecycle** and **Review date**. The lifecycle starts as **Draft**, and readers never see a draft: choose **Published** when the page is meant for readers once it is approved.
+
+![Page settings in the New page form with Lifecycle Published](assets/docsai/v1/screenshots/create-a-page/04-author-page-settings-lifecycle.png)
 
 </Step>
 
@@ -38,13 +57,21 @@ Open **Page settings** in the form to set the description, owner, review date an
 
 ## Create the page
 
-Choose **Create page**. The console commits the file and the catalog entry to your branch and opens the page in the editor.
+Choose **Create page**. The console answers *Page created in commit …* and the file appears in **Tracked files** with ✎.
+
+![The new file docs/docsai/v1/writing/components.md in Tracked files](assets/docsai/v1/screenshots/create-a-page/05-author-page-created.png)
 
 </Step>
 
 </Steps>
 
 The address of a page is always `docs/<product>/<version>/<slug>/`. Folders and sections never appear in it, so you can move a page later without breaking links.
+
+<Callout type="info" title="Page type and the template check">
+
+A page with a page type is checked against its template. When sections are missing, validation reports *This feature-guide page is missing sections its template expects: …* as a warning. If the template does not fit, clear the type in [Page settings](/docs/docsai/v1/page-settings/), as this site did.
+
+</Callout>
 
 ## Next steps
 

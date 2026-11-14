@@ -10,7 +10,9 @@ You need the **owner** role in the tenant and a verified GitHub connection. See 
 
 ## Browse the provider
 
-Choose **Repositories**, then **Connect repository**. Make sure the provider shows **Verified at last check**, then choose **Browse repositories**. DocsAI lists the repositories the connection can read, up to 30 at a time. Type in **Find provider repository** to narrow the list, and choose **Load more** to see more.
+Choose **Repositories**, then **Connect repository**. Make sure the provider shows **Verified at last check**, then choose **Browse repositories**. DocsAI lists the repositories the connection can read in alphabetical order, 30 at a time, each with its default branch. Choose **Load more repositories** until you see yours.
+
+![Browse repositories with rajnishkg/docsai-docs and its Import & open button](assets/docsai/v1/screenshots/import-a-repository/01-admin-browse-repositories.png)
 
 </Step>
 
@@ -18,13 +20,15 @@ Choose **Repositories**, then **Connect repository**. Make sure the provider sho
 
 ## Import and open
 
-Choose **Import & open** next to the repository. DocsAI clones it, validates the catalog and opens the new project in **Content**.
+Choose **Import & open** next to the repository. The console shows *Cloning and validating the catalog…*, then opens the project in **Content**.
+
+![The imported repository open in Content as the DocsAI docs project](assets/docsai/v1/screenshots/import-a-repository/02-admin-import-and-open.png)
 
 </Step>
 
 </Steps>
 
-If the repository is already connected in your tenant, DocsAI reuses that connection. To work on the same repository in a second, separate working copy, choose **New working copy** on its card in **Repositories**.
+If the repository is already connected in your tenant, DocsAI reuses that connection and opens its project. That is what happened here: `rajnishkg/docsai-docs` was created from the console, so **Import & open** opened the existing **DocsAI docs** project and created no second one. To work on the same repository in a separate working copy, choose **New working copy** on its card in **Repositories**.
 
 ## When import is refused
 

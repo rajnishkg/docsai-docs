@@ -6,9 +6,21 @@ A review is always about one exact commit. Commit your change, then submit that 
 
 <Step>
 
+## Write the commit message
+
+Below the editor, replace the default **Commit message** (*Update guide*) with one line in the form `docs(<section>): <change>`, for example `docs(writing): add the components page`.
+
+![Commit message filled in above Commit source changes](assets/docsai/v1/screenshots/submit-for-review/01-author-commit-message.png)
+
+</Step>
+
+<Step>
+
 ## Commit
 
-Type a **Commit message** in the form `docs(<section>): <change>`, for example `docs(writing): add the components page`, and choose **Commit source changes**. The console validates the page and answers *Source committed*.
+Choose **Commit source changes**. The console validates the page and answers *Source committed · 〈commit〉*.
+
+![Source committed message with the new commit id](assets/docsai/v1/screenshots/submit-for-review/02-author-source-committed.png)
 
 </Step>
 
@@ -16,7 +28,9 @@ Type a **Commit message** in the form `docs(<section>): <change>`, for example `
 
 ## Check what you submit
 
-**Review and publication** shows *Review binds this full commit: …* with the commit id, and **Git diff from cloned source** shows every line your branch changes.
+**Review and publication** shows *Review binds this full commit: … A later commit needs another review.*, and **Git diff from cloned source** shows every line your branch changes.
+
+![Review and publication with the commit the review binds](assets/docsai/v1/screenshots/submit-for-review/03-author-review-binds-commit.png)
 
 </Step>
 
@@ -26,13 +40,15 @@ Type a **Commit message** in the form `docs(<section>): <change>`, for example `
 
 Choose **Submit commit for review**. The console answers *Commit submitted for review* and reviewers get a notification under the bell.
 
+![Commit submitted for review message](assets/docsai/v1/screenshots/submit-for-review/04-author-commit-submitted.png)
+
 </Step>
 
 </Steps>
 
 <Callout type="warning" title="A new commit needs a new review">
 
-If you commit again after submitting, even a one-letter fix, the submission no longer matches the branch. Submit again.
+If anyone commits to the branch after you submit, even a page settings change or an area change by an admin, the submission no longer matches the branch. Submit again.
 
 </Callout>
 

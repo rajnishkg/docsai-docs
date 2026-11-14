@@ -1,6 +1,6 @@
 # Declare test servers
 
-Readers can send requests from the reader site only to a **mock** or a **sandbox** server. Production and staging servers in the definition stay documentation: the playground never sends to them.
+Readers can send requests from the reader site only to a **mock** or a **sandbox** server. The `servers` in the definition stay documentation: the reader playground never sends to them.
 
 ## Declare the server
 
@@ -19,6 +19,10 @@ Rules:
 - Never put credentials in `catalog.json` or `playground/environments.yaml`. Validation rejects them.
 
 `playground/environments.yaml` declares servers for every API of the repository; an API's own `environments` take precedence.
+
+On the reader site the API overview lists the server under **Test servers** and **Live playground**, and **API environment** selects it:
+
+![Test servers, Live playground and API environment set to Local mock](assets/docsai/v1/screenshots/test-servers/01-reader-test-servers-and-environment.png)
 
 ## Run a local mock
 

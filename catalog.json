@@ -80,7 +80,9 @@
       "reviewDate": "2027-11-13",
       "redirects": [],
       "related": [],
-      "assets": []
+      "assets": [
+        "assets/docsai/v1/screenshots/introduction/01-reader-introduction.png"
+      ]
     },
     {
       "id": "how-docsai-works",
@@ -177,7 +179,9 @@
       "related": [],
       "assets": [
         "assets/docsai/v1/screenshots/create-documentation-repository/01-admin-open-create-project.png",
-        "assets/docsai/v1/screenshots/create-documentation-repository/02-admin-fill-repository-details.png"
+        "assets/docsai/v1/screenshots/create-documentation-repository/02-admin-fill-repository-details.png",
+        "assets/docsai/v1/screenshots/create-documentation-repository/03-admin-project-created.png",
+        "assets/docsai/v1/screenshots/create-documentation-repository/04-reader-github-starter-repository.png"
       ]
     },
     {
@@ -196,7 +200,10 @@
       "reviewDate": "2027-11-13",
       "redirects": [],
       "related": [],
-      "assets": []
+      "assets": [
+        "assets/docsai/v1/screenshots/import-a-repository/01-admin-browse-repositories.png",
+        "assets/docsai/v1/screenshots/import-a-repository/02-admin-import-and-open.png"
+      ]
     },
     {
       "id": "users-and-roles",
@@ -216,7 +223,8 @@
       "related": [],
       "assets": [
         "assets/docsai/v1/screenshots/users-and-roles/01-admin-teams.png",
-        "assets/docsai/v1/screenshots/users-and-roles/02-admin-add-team.png"
+        "assets/docsai/v1/screenshots/users-and-roles/02-admin-add-team.png",
+        "assets/docsai/v1/screenshots/users-and-roles/03-admin-project-access.png"
       ]
     },
     {
@@ -235,7 +243,11 @@
       "reviewDate": "2027-11-13",
       "redirects": [],
       "related": [],
-      "assets": []
+      "assets": [
+        "assets/docsai/v1/screenshots/ownership-areas/01-admin-area-ownership.png",
+        "assets/docsai/v1/screenshots/ownership-areas/02-admin-add-area.png",
+        "assets/docsai/v1/screenshots/ownership-areas/03-admin-areas-saved.png"
+      ]
     },
     {
       "id": "publish-the-reader-site",
@@ -253,7 +265,14 @@
       "reviewDate": "2027-11-13",
       "redirects": [],
       "related": [],
-      "assets": []
+      "assets": [
+        "assets/docsai/v1/screenshots/publish-the-reader-site/01-author-submit-main.png",
+        "assets/docsai/v1/screenshots/publish-the-reader-site/02-reviewer-approve-main.png",
+        "assets/docsai/v1/screenshots/publish-the-reader-site/03-admin-publish-approved-commit.png",
+        "assets/docsai/v1/screenshots/publish-the-reader-site/04-admin-publication-queued.png",
+        "assets/docsai/v1/screenshots/publish-the-reader-site/05-admin-deployments.png",
+        "assets/docsai/v1/screenshots/publish-the-reader-site/06-admin-reader-site-settings.png"
+      ]
     },
     {
       "id": "sync-changes-from-github",
@@ -271,7 +290,12 @@
       "reviewDate": "2027-11-13",
       "redirects": [],
       "related": [],
-      "assets": []
+      "assets": [
+        "assets/docsai/v1/screenshots/sync-changes-from-github/01-admin-sync-source.png",
+        "assets/docsai/v1/screenshots/sync-changes-from-github/02-admin-source-synchronized.png",
+        "assets/docsai/v1/screenshots/sync-changes-from-github/03-author-update-from-published-base.png",
+        "assets/docsai/v1/screenshots/sync-changes-from-github/04-admin-sync-after-merge.png"
+      ]
     },
     {
       "id": "create-a-page",
@@ -289,7 +313,13 @@
       "reviewDate": "2027-11-13",
       "redirects": [],
       "related": [],
-      "assets": []
+      "assets": [
+        "assets/docsai/v1/screenshots/create-a-page/01-author-start-editing.png",
+        "assets/docsai/v1/screenshots/create-a-page/02-author-choose-page-type.png",
+        "assets/docsai/v1/screenshots/create-a-page/03-author-fill-new-page.png",
+        "assets/docsai/v1/screenshots/create-a-page/04-author-page-settings-lifecycle.png",
+        "assets/docsai/v1/screenshots/create-a-page/05-author-page-created.png"
+      ]
     },
     {
       "id": "visual-editor",
@@ -307,7 +337,13 @@
       "reviewDate": "2027-11-13",
       "redirects": [],
       "related": [],
-      "assets": []
+      "assets": [
+        "assets/docsai/v1/screenshots/visual-editor/01-author-insert-callout.png",
+        "assets/docsai/v1/screenshots/visual-editor/02-author-insert-steps.png",
+        "assets/docsai/v1/screenshots/visual-editor/03-author-insert-tabs.png",
+        "assets/docsai/v1/screenshots/visual-editor/04-author-insert-cards.png",
+        "assets/docsai/v1/screenshots/visual-editor/05-author-insert-accordions.png"
+      ]
     },
     {
       "id": "markdown-source",
@@ -325,7 +361,11 @@
       "reviewDate": "2027-11-13",
       "redirects": [],
       "related": [],
-      "assets": []
+      "assets": [
+        "assets/docsai/v1/screenshots/markdown-source/01-author-switch-to-markdown-source.png",
+        "assets/docsai/v1/screenshots/markdown-source/02-author-insert-callout-snippet.png",
+        "assets/docsai/v1/screenshots/markdown-source/03-author-split-preview.png"
+      ]
     },
     {
       "id": "page-settings",
@@ -337,6 +377,27 @@
       "description": "Change the description, reader section, page type and order of a page after it exists.",
       "section": "writing",
       "order": 40,
+      "classification": "public",
+      "lifecycle": "published",
+      "owner": "documentation-team",
+      "reviewDate": "2027-11-13",
+      "redirects": [],
+      "related": [],
+      "assets": [
+        "assets/docsai/v1/screenshots/page-settings/01-author-edit-page-settings.png",
+        "assets/docsai/v1/screenshots/page-settings/02-author-page-settings-saved.png"
+      ]
+    },
+    {
+      "id": "components",
+      "product": "docsai",
+      "version": "v1",
+      "slug": "components",
+      "file": "docs/docsai/v1/writing/components.md",
+      "title": "Use reader components",
+      "description": "The components readers see: callouts, steps, tabs, cards, accordions and titled code blocks.",
+      "section": "writing",
+      "order": 50,
       "classification": "public",
       "lifecycle": "published",
       "owner": "documentation-team",
@@ -361,7 +422,12 @@
       "reviewDate": "2027-11-13",
       "redirects": [],
       "related": [],
-      "assets": []
+      "assets": [
+        "assets/docsai/v1/screenshots/submit-for-review/01-author-commit-message.png",
+        "assets/docsai/v1/screenshots/submit-for-review/02-author-source-committed.png",
+        "assets/docsai/v1/screenshots/submit-for-review/03-author-review-binds-commit.png",
+        "assets/docsai/v1/screenshots/submit-for-review/04-author-commit-submitted.png"
+      ]
     },
     {
       "id": "review-and-approve",
@@ -379,7 +445,13 @@
       "reviewDate": "2027-11-13",
       "redirects": [],
       "related": [],
-      "assets": []
+      "assets": [
+        "assets/docsai/v1/screenshots/review-and-approve/01-reviewer-open-branch.png",
+        "assets/docsai/v1/screenshots/review-and-approve/02-reviewer-read-diff.png",
+        "assets/docsai/v1/screenshots/review-and-approve/03-reviewer-approve-exact-commit.png",
+        "assets/docsai/v1/screenshots/review-and-approve/04-reviewer-api-team-approves.png",
+        "assets/docsai/v1/screenshots/review-and-approve/05-admin-publish-branch.png"
+      ]
     },
     {
       "id": "resolve-conflicts",
@@ -397,7 +469,13 @@
       "reviewDate": "2027-11-13",
       "redirects": [],
       "related": [],
-      "assets": []
+      "assets": [
+        "assets/docsai/v1/screenshots/resolve-conflicts/01-author-update-from-published-base.png",
+        "assets/docsai/v1/screenshots/resolve-conflicts/02-author-conflict-listed.png",
+        "assets/docsai/v1/screenshots/resolve-conflicts/03-author-compare-versions.png",
+        "assets/docsai/v1/screenshots/resolve-conflicts/04-author-edit-result.png",
+        "assets/docsai/v1/screenshots/resolve-conflicts/05-author-merge-committed.png"
+      ]
     },
     {
       "id": "edit-on-github",
@@ -415,7 +493,13 @@
       "reviewDate": "2027-11-13",
       "redirects": [],
       "related": [],
-      "assets": []
+      "assets": [
+        "assets/docsai/v1/screenshots/edit-on-github/01-reader-repository-home.png",
+        "assets/docsai/v1/screenshots/edit-on-github/02-reader-section-folder.png",
+        "assets/docsai/v1/screenshots/edit-on-github/03-reader-page-file.png",
+        "assets/docsai/v1/screenshots/edit-on-github/04-reader-commit-on-github.png",
+        "assets/docsai/v1/screenshots/edit-on-github/05-admin-sync-github-edit.png"
+      ]
     },
     {
       "id": "edit-locally-with-vs-code",
@@ -433,7 +517,9 @@
       "reviewDate": "2027-11-13",
       "redirects": [],
       "related": [],
-      "assets": []
+      "assets": [
+        "assets/docsai/v1/screenshots/connect-github/04-admin-verify-provider.png"
+      ]
     },
     {
       "id": "pull-requests",
@@ -451,7 +537,12 @@
       "reviewDate": "2027-11-13",
       "redirects": [],
       "related": [],
-      "assets": []
+      "assets": [
+        "assets/docsai/v1/screenshots/pull-requests/01-author-push-and-open-pr.png",
+        "assets/docsai/v1/screenshots/pull-requests/02-reader-pull-request.png",
+        "assets/docsai/v1/screenshots/pull-requests/03-reader-pull-request-files.png",
+        "assets/docsai/v1/screenshots/pull-requests/04-reader-pull-request-merged.png"
+      ]
     },
     {
       "id": "publish-an-openapi-definition",
@@ -469,7 +560,10 @@
       "reviewDate": "2027-11-13",
       "redirects": [],
       "related": [],
-      "assets": []
+      "assets": [
+        "assets/docsai/v1/screenshots/publish-an-openapi-definition/01-reader-api-overview.png",
+        "assets/docsai/v1/screenshots/publish-an-openapi-definition/02-reader-operation-reference.png"
+      ]
     },
     {
       "id": "test-servers",
@@ -487,7 +581,9 @@
       "reviewDate": "2027-11-13",
       "redirects": [],
       "related": [],
-      "assets": []
+      "assets": [
+        "assets/docsai/v1/screenshots/test-servers/01-reader-test-servers-and-environment.png"
+      ]
     },
     {
       "id": "test-request",
@@ -505,7 +601,11 @@
       "reviewDate": "2027-11-13",
       "redirects": [],
       "related": [],
-      "assets": []
+      "assets": [
+        "assets/docsai/v1/screenshots/test-request/01-reader-choose-test-request.png",
+        "assets/docsai/v1/screenshots/test-request/02-reader-playground-opens.png",
+        "assets/docsai/v1/screenshots/test-request/03-reader-response.png"
+      ]
     },
     {
       "id": "api-playground",
@@ -523,7 +623,12 @@
       "reviewDate": "2027-11-13",
       "redirects": [],
       "related": [],
-      "assets": []
+      "assets": [
+        "assets/docsai/v1/screenshots/api-playground/01-reader-send-without-credentials.png",
+        "assets/docsai/v1/screenshots/api-playground/02-reader-open-credentials.png",
+        "assets/docsai/v1/screenshots/api-playground/03-reader-enter-token.png",
+        "assets/docsai/v1/screenshots/api-playground/04-reader-response-with-token.png"
+      ]
     },
     {
       "id": "private-apis",
@@ -541,7 +646,15 @@
       "reviewDate": "2027-11-13",
       "redirects": [],
       "related": [],
-      "assets": []
+      "assets": [
+        "assets/docsai/v1/screenshots/private-apis/01-author-create-definition.png",
+        "assets/docsai/v1/screenshots/private-apis/02-author-open-workspace.png",
+        "assets/docsai/v1/screenshots/private-apis/03-author-reader-visibility-private.png",
+        "assets/docsai/v1/screenshots/private-apis/04-author-preview-reference.png",
+        "assets/docsai/v1/screenshots/private-apis/05-author-test-request.png",
+        "assets/docsai/v1/screenshots/private-apis/06-reader-private-api-not-found.png",
+        "assets/docsai/v1/screenshots/private-apis/07-reader-contract-list.png"
+      ]
     },
     {
       "id": "naming-conventions",
@@ -616,10 +729,29 @@
       "redirects": [],
       "related": [],
       "assets": []
-    },
-    {"id":"components","product":"docsai","version":"v1","slug":"components","file":"docs/docsai/v1/writing/components.md","title":"Use reader components","kind":"markdown","owner":"documentation-team","classification":"public","lifecycle":"published","reviewDate":"2027-11-13","section":"writing","redirects":[],"related":[],"assets":[],"order":50,"description":"The components readers see: callouts, steps, tabs, cards, accordions and titled code blocks."}
+    }
   ],
   "assets": [
+    {
+      "file": "assets/docsai/v1/screenshots/api-playground/01-reader-send-without-credentials.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/api-playground/02-reader-open-credentials.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/api-playground/03-reader-enter-token.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/api-playground/04-reader-response-with-token.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
     {
       "file": "assets/docsai/v1/screenshots/connect-github/01-admin-choose-identity.png",
       "classification": "public",
@@ -641,6 +773,31 @@
       "mime": "image/png"
     },
     {
+      "file": "assets/docsai/v1/screenshots/create-a-page/01-author-start-editing.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/create-a-page/02-author-choose-page-type.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/create-a-page/03-author-fill-new-page.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/create-a-page/04-author-page-settings-lifecycle.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/create-a-page/05-author-page-created.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
       "file": "assets/docsai/v1/screenshots/create-documentation-repository/01-admin-open-create-project.png",
       "classification": "public",
       "mime": "image/png"
@@ -651,12 +808,337 @@
       "mime": "image/png"
     },
     {
+      "file": "assets/docsai/v1/screenshots/create-documentation-repository/03-admin-project-created.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/create-documentation-repository/04-reader-github-starter-repository.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/edit-on-github/01-reader-repository-home.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/edit-on-github/02-reader-section-folder.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/edit-on-github/03-reader-page-file.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/edit-on-github/04-reader-commit-on-github.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/edit-on-github/05-admin-sync-github-edit.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/import-a-repository/01-admin-browse-repositories.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/import-a-repository/02-admin-import-and-open.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/introduction/01-reader-introduction.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/markdown-source/01-author-switch-to-markdown-source.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/markdown-source/02-author-insert-callout-snippet.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/markdown-source/03-author-split-preview.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/ownership-areas/01-admin-area-ownership.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/ownership-areas/02-admin-add-area.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/ownership-areas/03-admin-areas-saved.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/page-settings/01-author-edit-page-settings.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/page-settings/02-author-page-settings-saved.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/private-apis/01-author-create-definition.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/private-apis/02-author-open-workspace.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/private-apis/03-author-reader-visibility-private.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/private-apis/04-author-preview-reference.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/private-apis/05-author-test-request.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/private-apis/06-reader-private-api-not-found.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/private-apis/07-reader-contract-list.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/publish-an-openapi-definition/01-reader-api-overview.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/publish-an-openapi-definition/02-reader-operation-reference.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/publish-the-reader-site/01-author-submit-main.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/publish-the-reader-site/02-reviewer-approve-main.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/publish-the-reader-site/03-admin-publish-approved-commit.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/publish-the-reader-site/04-admin-publication-queued.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/publish-the-reader-site/05-admin-deployments.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/publish-the-reader-site/06-admin-reader-site-settings.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/pull-requests/01-author-push-and-open-pr.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/pull-requests/02-reader-pull-request.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/pull-requests/03-reader-pull-request-files.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/pull-requests/04-reader-pull-request-merged.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/resolve-conflicts/01-author-update-from-published-base.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/resolve-conflicts/02-author-conflict-listed.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/resolve-conflicts/03-author-compare-versions.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/resolve-conflicts/04-author-edit-result.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/resolve-conflicts/05-author-merge-committed.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/review-and-approve/01-reviewer-open-branch.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/review-and-approve/02-reviewer-read-diff.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/review-and-approve/03-reviewer-approve-exact-commit.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/review-and-approve/04-reviewer-api-team-approves.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/review-and-approve/05-admin-publish-branch.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/submit-for-review/01-author-commit-message.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/submit-for-review/02-author-source-committed.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/submit-for-review/03-author-review-binds-commit.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/submit-for-review/04-author-commit-submitted.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/sync-changes-from-github/01-admin-sync-source.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/sync-changes-from-github/02-admin-source-synchronized.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/sync-changes-from-github/03-author-update-from-published-base.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/sync-changes-from-github/04-admin-sync-after-merge.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/test-request/01-reader-choose-test-request.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/test-request/02-reader-playground-opens.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/test-request/03-reader-response.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/test-servers/01-reader-test-servers-and-environment.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
       "file": "assets/docsai/v1/screenshots/users-and-roles/01-admin-teams.png",
       "classification": "public",
       "mime": "image/png"
     },
     {
       "file": "assets/docsai/v1/screenshots/users-and-roles/02-admin-add-team.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/users-and-roles/03-admin-project-access.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/visual-editor/01-author-insert-callout.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/visual-editor/02-author-insert-steps.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/visual-editor/03-author-insert-tabs.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/visual-editor/04-author-insert-cards.png",
+      "classification": "public",
+      "mime": "image/png"
+    },
+    {
+      "file": "assets/docsai/v1/screenshots/visual-editor/05-author-insert-accordions.png",
       "classification": "public",
       "mime": "image/png"
     }
@@ -680,18 +1162,7 @@
       "assets": [],
       "bundleRoot": "apis/docsai/console-api/v1",
       "bundleFiles": [
-        "apis/docsai/console-api/v1/components/schemas.yaml",
-        "apis/docsai/console-api/v1/openapi.yaml",
-        "apis/docsai/console-api/v1/paths/branches.yaml",
-        "apis/docsai/console-api/v1/paths/diff.yaml",
-        "apis/docsai/console-api/v1/paths/file.yaml",
-        "apis/docsai/console-api/v1/paths/notifications-read.yaml",
-        "apis/docsai/console-api/v1/paths/notifications.yaml",
-        "apis/docsai/console-api/v1/paths/projects.yaml",
-        "apis/docsai/console-api/v1/paths/reader-pages.yaml",
-        "apis/docsai/console-api/v1/paths/review.yaml",
-        "apis/docsai/console-api/v1/paths/session.yaml",
-        "apis/docsai/console-api/v1/paths/tree.yaml"
+        "apis/docsai/console-api/v1/openapi.yaml"
       ],
       "documentationFiles": [
         "apis/docsai/console-api/v1/content/overview.md",
@@ -727,9 +1198,7 @@
       "assets": [],
       "bundleRoot": "apis/docsai/billing-sample/v1",
       "bundleFiles": [
-        "apis/docsai/billing-sample/v1/openapi.yaml",
-        "apis/docsai/billing-sample/v1/paths/invoice.yaml",
-        "apis/docsai/billing-sample/v1/paths/invoices.yaml"
+        "apis/docsai/billing-sample/v1/openapi.yaml"
       ],
       "documentationFiles": [
         "apis/docsai/billing-sample/v1/content/overview.md"
