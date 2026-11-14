@@ -2,7 +2,7 @@
 
 The reader site has no login. Anything in a release is public, so a private API is never published there. Private APIs stay in the console, where signed-in people read and test them in **Schema Studio**.
 
-This repository holds a sample: the **Billing sample API** in `apis/docsai/billing-sample/v1/openapi.yaml`.
+This repository holds a sample: the **Billing sample API**, in the `billing-sample` folder under `apis/docsai/`.
 
 ## Mark the repository entry protected
 
@@ -12,7 +12,7 @@ In `catalog.json`, set the API's classification to `protected`:
 {"id": "billing-sample", "title": "Billing sample API (private)", "classification": "protected", "lifecycle": "published"}
 ```
 
-Releases leave out protected APIs, their guides and their assets.
+Releases leave out protected APIs, their guides and their assets. A release build also refuses to publish when a public page mentions the full path of a protected file: the publication fails with *Build diagnostic: CHECKS_FAILED at building.* Refer to a private API by name, not by its file path.
 
 ## Read and test it in Schema Studio
 
